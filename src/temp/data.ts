@@ -1,0 +1,242 @@
+import {faker} from "@faker-js/faker";
+import {sample} from "lodash";
+import {HeadCell} from "../components/table/types";
+import {User} from "../sections/@dashboard/user/types";
+import {BlogPostSortOption} from "../sections/@dashboard/blog/types";
+import {LabelType} from "../sections/@dashboard/mail/MailItem";
+
+export const TABLE_HEAD: HeadCell<User>[] = [
+    {id: 'name', label: 'Name', alignRight: false},
+    {id: 'company', label: 'Company', alignRight: false},
+    {id: 'role', label: 'Role', alignRight: false},
+    {id: 'isVerified', label: 'Verified', alignRight: false},
+    {id: 'status', label: 'Status', alignRight: false},
+    {id: 'avatarUrl'}
+];
+export const users = [...Array(24)].map((_, index) => ({
+    id: faker.datatype.uuid(),
+    avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+    name: faker.name.fullName(),
+    company: faker.company.name(),
+    isVerified: faker.datatype.boolean(),
+    status: sample(['active', 'banned'])!,
+    role: sample([
+        'Leader',
+        'Hr Manager',
+        'UI Designer',
+        'UX Designer',
+        'UI/UX Designer',
+        'Project Manager',
+        'Backend Developer',
+        'Full Stack Designer',
+        'Front End Developer',
+        'Full Stack Developer',
+    ])!,
+}));
+const PRODUCT_NAME = [
+    'Nike Air Force 1 NDESTRUKT',
+    'Nike Space Hippie 04',
+    'Nike Air Zoom Pegasus 37 A.I.R. Chaz Bear',
+    'Nike Blazer Low 77 Vintage',
+    'Nike ZoomX SuperRep Surge',
+    'Zoom Freak 2',
+    'Nike Air Max Zephyr',
+    'Jordan Delta',
+    'Air Jordan XXXV PF',
+    'Nike Waffle Racer Crater',
+    'Kyrie 7 EP Sisterhood',
+    'Nike Air Zoom BB NXT',
+    'Nike Air Force 1 07 LX',
+    'Nike Air Force 1 Shadow SE',
+    'Nike Air Zoom Tempo NEXT%',
+    'Nike DBreak-Type',
+    'Nike Air Max Up',
+    'Nike Air Max 270 React ENG',
+    'NikeCourt Royale',
+    'Nike Air Zoom Pegasus 37 Premium',
+    'Nike Air Zoom SuperRep',
+    'NikeCourt Royale',
+    'Nike React Art3mis',
+    'Nike React Infinity Run Flyknit A.I.R. Chaz Bear',
+];
+const PRODUCT_COLOR = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#1890FF', '#94D82D', '#FFC107'];
+
+export const products = [...Array(24)].map((_, index) => {
+    const setIndex = index + 1;
+
+    return {
+        id: faker.datatype.uuid(),
+        cover: `/assets/images/products/product_${setIndex}.jpg`,
+        name: PRODUCT_NAME[index],
+        price: faker.datatype.number({min: 4, max: 99, precision: 0.01}),
+        priceSale: setIndex % 3 ? undefined : faker.datatype.number({min: 19, max: 29, precision: 0.01}),
+        colors:
+            (setIndex === 1 && PRODUCT_COLOR.slice(0, 2)) ||
+            (setIndex === 2 && PRODUCT_COLOR.slice(1, 3)) ||
+            (setIndex === 3 && PRODUCT_COLOR.slice(2, 4)) ||
+            (setIndex === 4 && PRODUCT_COLOR.slice(3, 6)) ||
+            (setIndex === 23 && PRODUCT_COLOR.slice(4, 6)) ||
+            (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
+            PRODUCT_COLOR,
+        status: sample(['sale', 'new', '', '']),
+    };
+});
+const POST_TITLES = [
+    'Whiteboard Templates By Industry Leaders',
+    'Tesla Cybertruck-inspired camper trailer for Tesla fans who can’t just wait for the truck!',
+    'Designify Agency Landing Page Design',
+    '✨What is Done is Done ✨',
+    'Fresh Prince',
+    'Six Socks Studio',
+    'vincenzo de cotiis’ crossing over showcases a research on contamination',
+    'Simple, Great Looking Animations in Your Project | Video Tutorial',
+    '40 Free Serif Fonts for Digital Designers',
+    'Examining the Evolution of the Typical Web Design Client',
+    'Katie Griffin loves making that homey art',
+    'The American Dream retold through mid-century railroad graphics',
+    'Illustration System Design',
+    'CarZio-Delivery Driver App SignIn/SignUp',
+    'How to create a client-serverless Jamstack app using Netlify, Gatsby and Fauna',
+    'Tylko Organise effortlessly -3D & Motion Design',
+    'RAYO ?? A expanded visual arts festival identity',
+    'Anthony Burrill and Wired mag’s Andrew Diprose discuss how they made January’s Change Everything cover',
+    'Inside the Mind of Samuel Day',
+    'Portfolio Review: Is This Portfolio Too Creative?',
+    'Akkers van Margraten',
+    'Gradient Ticket icon',
+    'Here’s a Dyson motorcycle concept that doesn’t ‘suck’!',
+    'How to Animate a SVG with border-image',
+];
+export const posts = [...Array(23)].map((_, index) => ({
+    id: faker.datatype.uuid(),
+    cover: `/assets/images/covers/cover_${index + 1}.jpg`,
+    title: POST_TITLES[index + 1],
+    createdAt: faker.date.past(),
+    view: faker.datatype.number(),
+    comment: faker.datatype.number(),
+    share: faker.datatype.number(),
+    favorite: faker.datatype.number(),
+    author: {
+        name: faker.name.fullName(),
+        avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+    },
+}));
+
+export const SORT_OPTIONS: BlogPostSortOption[] = [
+    {value: 'latest', label: 'Latest'},
+    {value: 'popular', label: 'Popular'},
+    {value: 'oldest', label: 'Oldest'},
+];
+
+export const account = {
+    displayName: 'Jaydon Frankie',
+    email: 'demo@minimals.cc',
+    photoURL: '/assets/images/avatars/avatar_default.jpg',
+    role:'admin',
+};
+
+export const emailNav = [
+    {
+        icon: 'eva:email-fill',
+        name: "all mail",
+        count: 3,
+        path:'allmail',
+    },
+    {
+        icon: 'eva:inbox-fill',
+        name: "inbox",
+        count: 1,
+        path:'inbox',
+    },
+    {
+        icon: 'ic:round-send',
+        name: "sent",
+        count: 0,
+        path:'sent',
+    },
+    {
+        icon: 'eva:file-fill',
+        name: "drafts",
+        count: 0,
+        path:'drafts',
+    },
+    {
+        icon: 'eva:trash-2-outline',
+        name: "trash",
+        count: 0,
+        path:'trash',
+    },
+    {
+        icon: 'ri:spam-2-fill',
+        name: "spam",
+        count: 1,
+        path:'spam',
+    },
+    {
+        icon: 'ic:round-label-important',
+        name: "important",
+        count: 1,
+        path:'important',
+    },
+    {
+        icon: 'eva:star-fill',
+        name: "starred",
+        count: 1,
+        path:'starred',
+    },
+    {
+        icon: 'ic:round-label',
+        name: "social",
+        count: 0,
+        color: 'success',
+        path:'social',
+    },
+    {
+        icon: 'ic:round-label',
+        name: "promotions",
+        count: 2,
+        color: 'warning',
+        path:'promotions',
+    },
+    {
+        icon: 'ic:round-label',
+        name: "forums",
+        count: 0,
+        color: 'error',
+        path:'forums',
+    }
+]
+export type MailType = 'inbox'
+    | 'sent'
+    | 'drafts'
+    | 'trash'
+    | 'spam'
+    | 'important'
+    | 'starred'
+    | 'social'
+    | 'promotions'
+    | 'forums'
+export const mails = Array.from(Array(faker.datatype.number({min: 20, max: 50})).keys()).map(() => ({
+    name: faker.name.fullName(),
+    avatar: Math.random() > 0.5 ? faker.image.avatar() : undefined,
+    subject: faker.company.catchPhrase(),
+    content: faker.company.catchPhrase(),
+    selected: Math.random() > 0.5,
+    starred: Math.random() > 0.5,
+    important: Math.random() > 0.5,
+    read: Math.random() > 0.5,
+    date: faker.date.past(),
+    labels: Array.from({
+        length: faker.datatype.number({
+            min: 0,
+            max: 5
+        })
+    }, () => sample(['social', 'promotions', 'forums'])!) as LabelType[],
+    type:Array.from({
+        length: faker.datatype.number({
+            min: 0,
+            max: 5
+        })
+    }, () => sample(['inbox', 'sent', 'drafts', 'trash', 'spam', 'important', 'starred', 'social', 'promotions',
+        'forums'])!) as MailType[]
+}))

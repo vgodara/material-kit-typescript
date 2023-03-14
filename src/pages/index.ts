@@ -1,0 +1,7 @@
+export {default as BlogPage} from './BlogPage'
+export {default as LoginPage} from './LoginPage'
+export {default as Page404} from './Page404'
+export {default as ProductsPage} from './ProductsPage'
+export {default as UserPage} from './UserPage'
+export {default as DashboardAppPage} from './DashboardAppPage'
+export {default as MailPage} from './MailPage'
