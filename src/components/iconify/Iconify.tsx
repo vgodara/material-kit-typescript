@@ -6,7 +6,7 @@ import {Icon} from "@iconify/react";
 const Iconify = forwardRef(({
                                 icon,
                                 width = 20,
-                                color = 'default',
+                                color = 'inherit',
                                 height,
                                 sx,
                                 ...other
