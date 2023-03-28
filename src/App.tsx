@@ -3,8 +3,7 @@ import './App.css';
 import ThemeProvider from "./theme";
 import {StyledChart} from "./components/chart";
 import ScrollToTop from "./components/scroll-to-top";
-import {Carousel} from "./components/carousel";
-import {faker} from "@faker-js/faker";
+import ProductBuyBox from "./sections/@dashboard/product/ProductBuyBox";
 
 
 function App() {
@@ -13,7 +12,7 @@ function App() {
         <ThemeProvider>
             <><ScrollToTop/>
                 <StyledChart/>
-                <Carousel list={Array.from(Array(10).keys()).map(()=>(faker.image.image()))}/>
+              <ProductBuyBox/>
             </>
         </ThemeProvider>
     )
