@@ -1,67 +1,101 @@
-import React, {Component} from "react";
-import {CarouselProps, CarouselState} from "./types";
+import React, {useState} from "react";
+import {CarouselProps} from "./types";
 import Slider from "react-slick";
-import {Box} from "@mui/material";
+import {alpha, Box, Card, CardContent, CardHeader, IconButton, Typography} from "@mui/material";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Iconify from "../iconify";
 
-export default class Carousel extends Component<CarouselProps, CarouselState> {
-    private _slider1: Slider | null|undefined = null
-    private _slider2: Slider | null|undefined = null
+export default function Carousel({list,slideToShow=3}: CarouselProps) {
+    const [slider1, setSlider1] = useState<Slider | null>(null);
+    const [slider2, setSlider2] = useState<Slider | null>(null)
+    const [currentIndex,setCurrentIndex]=useState(0)
+    return <>
+        <Card>
+            <CardHeader title={"Carousel Thumbnail"}/>
+            <CardContent>
+                <Box>
+                    <Box sx={(theme) => ({
+                        borderRadius: theme.spacing(2),
+                        position: 'relative',
+                        mb: 3,
+                        overflow: 'hidden',
+                    })}>
+                        <Slider
+                            lazyLoad={'ondemand'}
+                            asNavFor={slider2 ?? undefined}
+                            ref={setSlider1}
+                            afterChange={setCurrentIndex}
+                        >
+                            {list.map((imageUrl, index) =>
+                                (<Box key={index} sx={{objectFit: 'cover'}} component={'img'} src={imageUrl}>
 
-
-    private getSlider1() {
-        if (this._slider1)
-            return this._slider1
-    }
-    private getSlider2() {
-        if (this._slider2)
-            return this._slider2
-    }
-
-    constructor(props: CarouselProps) {
-        super(props)
-        this.state = {};
-        this._slider1=null
-        this._slider2=null
-
-    }
-
-    componentDidMount() {
-        this.setState({
-            nav1: this.getSlider1(),
-            nav2: this.getSlider2()
-        });
-    }
-
+                                    </Box>
+                                ))}
 
 
-    render() {
-        return <>
-            <Slider
-                key={1}
-                asNavFor={this.state.nav2}
-                ref={(slider)=>{this._slider1=slider}}
-            >
-                {this.props.list.map((imageUrl, index) =>
-                    (<Box key={index} component={'img'} src={imageUrl}/>
-                    ))}
-            </Slider>
+                        </Slider>
+                        <Box
+                            sx={(theme) => ({
+                                position: 'absolute',
+                                bottom: theme.spacing(2),
+                                right: theme.spacing(2),
+                                borderRadius: 1.4,
+                                display: 'inline-flex',
+                                color: theme.palette.common.white,
+                                alignItems: 'center',
+                                padding: 0.25,
+                                backdropFilter: 'blur(6px)',
+                                backgroundColor: alpha(theme.palette.grey["900"], 0.48),
+                                zIndex: 9
+                            })}
+                        >
+                            <IconButton onClick={slider1?.slickPrev}>
+                                <Iconify icon={'eva:arrow-ios-back-fill'}/>
+                            </IconButton>
+                            <Typography variant={'subtitle2'}>{`${currentIndex+1}\\${list.length}`}</Typography>
+                            <IconButton onClick={slider1?.slickNext}>
+                                <Iconify icon={'eva:arrow-ios-forward-fill'}/>
+                            </IconButton>
+                        </Box>
+                    </Box>
+                    <Box sx={(theme) => ({
+                        mx: 'auto',
+                        maxWidth: theme.spacing(48),
+                        position: 'relative',
+                        ':before,:after': {
+                            position: 'absolute',
+                            top: 0,
+                            content: '""',
+                            background: `linear-gradient(to left, ${alpha(theme.palette.common.white, 0)} 0%,  ${alpha(theme.palette.common.white, 1)} 100%)`,
+                            width: theme.spacing(5.3),
+                            height: 1,
+                            zIndex: 9,
+                        },
+                        ':after': {
+                            right: 0,
+                            transform: 'scaleX(-1)',
+                        }
+                    })}>
+                        <Slider
+                            lazyLoad={'ondemand'}
+                            asNavFor={slider1 ?? undefined}
+                            ref={setSlider2}
+                            slidesToShow={slideToShow}
+                            swipeToSlide
+                            focusOnSelect
+                        >
+                            {list.map((imageUrl, index) =>
+                                (<Box sx={ (theme)=>({
+                                    px: 0.75,
+                                })} key={index} component={'img'} src={imageUrl}/>
+                                ))}
+                        </Slider>
+                    </Box>
+                </Box>
+            </CardContent>
 
-            <Slider
-                key={2}
-                asNavFor={this.state.nav1}
-                ref={(slider)=>{this._slider2=slider}}
-                slidesToShow={this.props.list.length}
-                swipeToSlide={true}
-                focusOnSelect={true}
-            >
-                {this.props.list.map((imageUrl, index) =>
-                    (<Box key={index} component={'img'} src={imageUrl}/>
-                    ))}
-            </Slider>
-        </>;
-    }
+        </Card></>
 }

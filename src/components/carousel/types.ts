@@ -1,12 +1,6 @@
-import Slider from "react-slick";
-
-export {}
-
 export interface CarouselProps {
     list: string[]
+
+    slideToShow?:number
 }
 
-export interface CarouselState {
-    nav1?: Slider
-    nav2?: Slider
-}
