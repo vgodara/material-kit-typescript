@@ -4,7 +4,7 @@ import {Radio, RadioGroup} from "@mui/material";
 import Icon from "./Icon";
 
 
-export const ColorSinglePicker = forwardRef<unknown, ColorSinglePickerProps>(({colors, ...other}, ref) => {
+export const ColorSinglePicker = forwardRef<unknown, ColorSinglePickerProps>(({colors,onSelect, ...other}, ref) => {
     return <RadioGroup ref={ref} row {...other} >
         {colors.map((color) => {
             const whiteColor = color === '#FFFFFF' || color === 'white'
@@ -13,6 +13,7 @@ export const ColorSinglePicker = forwardRef<unknown, ColorSinglePickerProps>(({c
                 key={color}
                 value={color}
                 color={"default"}
+                onSelect={(event)=>{onSelect(event.currentTarget.value)}}
                 icon={<Icon whiteColor={whiteColor}/>}
                 checkedIcon={<Icon checked whiteColor={whiteColor}/>}
                 sx={{

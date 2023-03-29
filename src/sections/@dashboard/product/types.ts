@@ -1,6 +1,6 @@
 import {SxProps, Theme} from "@mui/material";
 
-interface Product {
+interface ProductList {
     id: string,
     cover: string,
     name: string,
@@ -10,13 +10,23 @@ interface Product {
     status?: string
 }
 
+interface ProductDetail extends ProductList {
+    sellableUnit:number,
+    rating:number,
+    totalReviews:number
+}
+
+export interface ProductBuyBoxProps {
+    product:ProductDetail
+}
+
 export interface ShopProductProps {
-    product: Product
+    product: ProductList
 }
 
 export interface ProductListProps {
     sx?:SxProps<Theme>
-    products: Product[]
+    products: ProductList[]
 }
 
 export interface ShopFilterSidebarProps {

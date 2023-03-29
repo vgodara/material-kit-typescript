@@ -10,6 +10,7 @@ import {
     MenuItem,
     Rating,
     Select,
+    SelectChangeEvent,
     Stack,
     Typography
 } from "@mui/material";
@@ -18,19 +19,23 @@ import {useState} from "react";
 import {sample} from "lodash";
 import {Counter} from "../../../components/counter";
 import Iconify from "../../../components/iconify";
+import Label from "../../../components/label";
+import {ProductBuyBoxProps} from "./types";
+import {fNumber} from "../../../utils/formatNumber";
 
-export default function ProductBuyBox() {
+export default function ProductBuyBox({product}:ProductBuyBoxProps) {
 
-
+    const sizes = [...Array(5)].map((_, index) => (index + 5))
+    let selectedSize=sample(sizes)!
     return <FormControl fullWidth component={'form'} sx={(theme) => ({
         padding: {md: theme.spacing(5, 5, 0, 2)},
     })}>
         <Stack spacing={3}>
-            <ProductDescription/>
+            <ProductDescription product={product}/>
             <Divider sx={{borderStyle: 'dashed'}} flexItem variant={'fullWidth'}/>
-            <ProductColorSelection/>
-            <ProductSizeSelection/>
-            <ProductQuantitySelection/>
+            <ProductColorSelection colors={product.colors} setSelectedColor={()=>{}}/>
+            <ProductSizeSelection sizes={sizes} selectedSize={selectedSize} setSelectedSize={(size)=>selectedSize=size}/>
+            <ProductQuantitySelection availableQuantity={product.sellableUnit} setSelectedQuantity={()=>{}}/>
             <Divider sx={{borderStyle: 'dashed'}} flexItem variant={'fullWidth'}/>
             <ProductBuyButtons/>
             <SocialMediaLinks/>
@@ -39,62 +44,66 @@ export default function ProductBuyBox() {
     </FormControl>
 }
 
-function ProductDescription() {
+function ProductDescription({product}:ProductBuyBoxProps) {
+    const {name,status,rating,price,priceSale, totalReviews}=product
+    const outOfStock=product.sellableUnit>0
     return <Stack spacing={2}>
-        <Typography sx={(theme) => ({
-            color: theme.palette.error.dark,
-            backgroundColor: alpha(theme.palette.error.main, .16),
-            minWidth: 22,
-            padding: theme.spacing(0.5, 1),
-            display: 'flex',
-            alignItems: 'center',
-            marginRight: 'auto',
-            borderRadius: 1,
-        })} noWrap variant={'overline'}>Out of Stock</Typography>
+        {outOfStock ??  <Label variant={'filled'} color={'error'}
+                               sx={{
+                                   marginRight:'auto',
+                                   color:(theme)=>theme.palette.error.dark,
+                                   backgroundColor:(theme)=> alpha(theme.palette.error.main, .16),
+                                   textTransform: 'uppercase',
 
-        <Typography color={'error'} variant={'overline'}>
-            Sale
+                               }}>Out of stock</Label>}
+
+        <Typography color={status === 'sale' ? 'error' : 'info'} variant={'overline'}>
+            {status}
         </Typography>
-        <Typography variant={'h5'}>Nike Air Force 1 NDESTRUKT</Typography>
+        <Typography variant={'h5'}>{name}</Typography>
         <Box sx={(theme) => ({
             display: 'flex',
             columnGap: theme.spacing(1),
             alignItems: 'center',
         })}>
-            <Rating readOnly value={2.5} precision={0.5}/>
-            <Typography color={'text.secondary'} variant={'body2'}>(7.42kreviews)</Typography>
+            <Rating readOnly value={rating} precision={0.5}/>
+            <Typography color={'text.secondary'} variant={'body2'}>{`(${fNumber(totalReviews)})`}</Typography>
         </Box>
         <Typography variant={'h4'}>
-            {(Math.random() > 0.1 &&
+            {priceSale &&
                 <Typography component={'span'} variant={'h4'} color={'text.disabled'}
-                            sx={{textDecoration: 'line-through', mr: 0.5}}>$16.19</Typography>)}
-            $16.19
+                            sx={{textDecoration: 'line-through', mr: 0.5}}>{price}</Typography>  }
+            {priceSale ? priceSale :price}
         </Typography>
     </Stack>
 }
 
-function ProductColorSelection(){
+function ProductColorSelection({colors,setSelectedColor}:{colors:string[],setSelectedColor:(color:string)=>void}){
     return  <Box sx={() => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
     })}>
         <Typography variant={'subtitle2'}>Color</Typography>
-        <ColorSinglePicker colors={['#00ab55', '#000000']}/>
+        <ColorSinglePicker colors={colors} onSelect={setSelectedColor}/>
     </Box>
 }
-function ProductSizeSelection(){
-    const sizes = [...Array(5)].map((_, index) => (index + 5))
-    const [size, setSize] = useState(sample(sizes)!)
+function ProductSizeSelection({sizes,selectedSize,setSelectedSize}:{sizes:number[],selectedSize:number,setSelectedSize:(size:number)=>void}){
+    // const sizes = [...Array(5)].map((_, index) => (index + 5))
+    const [size, setSize] = useState(selectedSize)
+    const handleSizeSelection=(event: SelectChangeEvent<number>)=>{
+        const size= event.target.value as number
+        setSelectedSize(size)
+        setSize(size)
+
+    }
     return  <Box sx={() => ({
         display: 'flex',
         justifyContent: 'space-between',
     })}>
         <Typography py={1} variant={'subtitle2'}>Size</Typography>
         <FormControl sx={{minWidth: 96}}>
-            <Select  size={'small'} value={size} onChange={(event) => {
-                setSize(event.target.value as number)
-            }}>
+            <Select  size={'small'} value={size} onChange={handleSizeSelection}>
                 {sizes.map((size, index) => (<MenuItem value={size} key={index}>{size}</MenuItem>))}
             </Select>
             <FormHelperText sx={(theme) => ({m: theme.spacing(1, 0, 0, 0), textAlign: 'right'})}>
@@ -106,17 +115,17 @@ function ProductSizeSelection(){
 
     </Box>
 }
-function ProductQuantitySelection(){
+function ProductQuantitySelection({availableQuantity,setSelectedQuantity}:{availableQuantity:number,setSelectedQuantity:(quantity:number)=>void}){
     return  <Box sx={() => ({
         display: 'flex',
         justifyContent: 'space-between',
     })}>
         <Typography py={1} variant={'subtitle2'}>Quantity</Typography>
         <FormControl>
-            <Counter initial={1} max={5} min={1}/>
+            <Counter initial={1} max={availableQuantity} min={1} setQuantity={setSelectedQuantity}/>
             <FormHelperText sx={(theme) => ({m: theme.spacing(1, 0, 0, 0), textAlign: 'right'})}>
                 <Typography variant="caption">
-                    Available
+                    {`Available ${availableQuantity}`}
                 </Typography>
             </FormHelperText>
         </FormControl>

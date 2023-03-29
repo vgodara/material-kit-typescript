@@ -14,6 +14,8 @@ export interface ColorPreviewProps {
 
 export interface ColorSinglePickerProps {
     colors: string[]
+
+    onSelect: (color: string) => void
 }
 
 export interface ColorMultiPickerProps {
