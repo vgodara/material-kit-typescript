@@ -21,7 +21,7 @@ import {Counter} from "../../../components/counter";
 import Iconify from "../../../components/iconify";
 import Label from "../../../components/label";
 import {ProductBuyBoxProps} from "./types";
-import {fNumber} from "../../../utils/formatNumber";
+import {fCurrency, fShortenNumber} from "../../../utils/formatNumber";
 
 export default function ProductBuyBox({product}:ProductBuyBoxProps) {
 
@@ -45,21 +45,20 @@ export default function ProductBuyBox({product}:ProductBuyBoxProps) {
 }
 
 function ProductDescription({product}:ProductBuyBoxProps) {
-    const {name,status,rating,price,priceSale, totalReviews}=product
-    const outOfStock=product.sellableUnit>0
+    const {name,status,rating,price,priceSale, totalReviews,outOfStock}= { outOfStock:product.sellableUnit<0,...product}
     return <Stack spacing={2}>
-        {outOfStock ??  <Label variant={'filled'} color={'error'}
+        { <Label variant={'filled'}
                                sx={{
                                    marginRight:'auto',
-                                   color:(theme)=>theme.palette.error.dark,
-                                   backgroundColor:(theme)=> alpha(theme.palette.error.main, .16),
+                                   color:(theme)=>outOfStock? theme.palette.error.darker:theme.palette.success.darker,
+                                   backgroundColor:(theme)=>  alpha(outOfStock? theme.palette.error.main:theme.palette.success.main, .16),
                                    textTransform: 'uppercase',
 
-                               }}>Out of stock</Label>}
+                               }}>{outOfStock?`Out of stock`:'in stock'}</Label>}
 
-        <Typography color={status === 'sale' ? 'error' : 'info'} variant={'overline'}>
+        {status && <Typography color={status === 'sale' ? 'error' : 'info'} variant={'overline'}>
             {status}
-        </Typography>
+        </Typography>}
         <Typography variant={'h5'}>{name}</Typography>
         <Box sx={(theme) => ({
             display: 'flex',
@@ -67,13 +66,13 @@ function ProductDescription({product}:ProductBuyBoxProps) {
             alignItems: 'center',
         })}>
             <Rating readOnly value={rating} precision={0.5}/>
-            <Typography color={'text.secondary'} variant={'body2'}>{`(${fNumber(totalReviews)})`}</Typography>
+            <Typography color={'text.secondary'} variant={'body2'}>{`(${fShortenNumber(totalReviews)})`}</Typography>
         </Box>
         <Typography variant={'h4'}>
             {priceSale &&
                 <Typography component={'span'} variant={'h4'} color={'text.disabled'}
-                            sx={{textDecoration: 'line-through', mr: 0.5}}>{price}</Typography>  }
-            {priceSale ? priceSale :price}
+                            sx={{textDecoration: 'line-through', mr: 0.5}}>{fCurrency(price)}</Typography>  }
+            { fCurrency(priceSale ? priceSale :price)}
         </Typography>
     </Stack>
 }
@@ -89,7 +88,6 @@ function ProductColorSelection({colors,setSelectedColor}:{colors:string[],setSel
     </Box>
 }
 function ProductSizeSelection({sizes,selectedSize,setSelectedSize}:{sizes:number[],selectedSize:number,setSelectedSize:(size:number)=>void}){
-    // const sizes = [...Array(5)].map((_, index) => (index + 5))
     const [size, setSize] = useState(selectedSize)
     const handleSizeSelection=(event: SelectChangeEvent<number>)=>{
         const size= event.target.value as number
