@@ -14,24 +14,27 @@ interface ProductList {
 interface Rating {
     user: User,
     verifiedPurchase: boolean,
-    verifiedPurchaseText:string
+    verifiedPurchaseText: string
     stars: number,
     review: string,
-    reviewTime:Date,
+    reviewTime: Date,
 
-    helpfulText:string,
+    helpfulText: string,
 
-    foundHelpful:number
+    foundHelpful: number
 
 }
-export interface RatingProps{
-    rating:Rating
+
+export interface RatingProps {
+    rating: Rating
 }
+
 interface ProductDetail extends ProductList {
     sellableUnit: number,
-    averageRating:number
-    aggregatedRatings: { label: string, value: number,occurrence:number }[]
-    ratings: Rating[],
+    averageRating: number,
+    totalReviews: number
+    aggregatedRatings: { label: string, value: number, occurrence: number }[]
+    ratingList: { ratings: Rating[], nextPage?: number },
 
     descriptions: {
         heading: string
