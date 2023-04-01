@@ -1,4 +1,5 @@
 import {SxProps, Theme} from "@mui/material";
+import {User} from "../user/types";
 
 interface ProductList {
     id: string,
@@ -10,14 +11,36 @@ interface ProductList {
     status?: string
 }
 
+interface Rating {
+    user: User,
+    verifiedPurchase: boolean,
+    verifiedPurchaseText:string
+    stars: number,
+    review: string,
+    reviewTime:Date,
+
+    helpfulText:string,
+
+    foundHelpful:number
+
+}
+export interface RatingProps{
+    rating:Rating
+}
 interface ProductDetail extends ProductList {
-    sellableUnit:number,
-    rating:number,
-    totalReviews:number
+    sellableUnit: number,
+    averageRating:number
+    aggregatedRatings: { label: string, value: number,occurrence:number }[]
+    ratings: Rating[],
+
+    descriptions: {
+        heading: string
+        detail: string
+    }[]
 }
 
 export interface ProductBuyBoxProps {
-    product:ProductDetail
+    product: ProductDetail
 }
 
 export interface ShopProductProps {
@@ -25,7 +48,7 @@ export interface ShopProductProps {
 }
 
 export interface ProductListProps {
-    sx?:SxProps<Theme>
+    sx?: SxProps<Theme>
     products: ProductList[]
 }
 

@@ -45,7 +45,9 @@ export default function ProductBuyBox({product}:ProductBuyBoxProps) {
 }
 
 function ProductDescription({product}:ProductBuyBoxProps) {
-    const {name,status,rating,price,priceSale, totalReviews,outOfStock}= { outOfStock:product.sellableUnit<0,...product}
+    const {name,status,aggregatedRatings,price,priceSale,averageRating}= product
+    const outOfStock=product.sellableUnit<0
+    const totalReviews=aggregatedRatings.map((rating)=>(rating.occurrence)).reduce(((sum, rating)=>(sum+rating)),0)
     return <Stack spacing={2}>
         { <Label variant={'filled'}
                                sx={{
@@ -65,7 +67,7 @@ function ProductDescription({product}:ProductBuyBoxProps) {
             columnGap: theme.spacing(1),
             alignItems: 'center',
         })}>
-            <Rating readOnly value={rating} precision={0.5}/>
+            <Rating readOnly value={averageRating} precision={0.5}/>
             <Typography color={'text.secondary'} variant={'body2'}>{`(${fShortenNumber(totalReviews)})`}</Typography>
         </Box>
         <Typography variant={'h4'}>
