@@ -3,21 +3,24 @@ import {Box, Card, Link, Stack, Typography} from "@mui/material";
 import Label from "../../../components/label";
 import {ColorPreview} from "../../../components/color-utils/ColorPreview";
 import {fCurrency} from "../../../utils/formatNumber";
+import {Link as RouterLink} from "react-router-dom"
 
 export default function ProductCard({product: {id, name, cover, colors, price, status, priceSale}}: ShopProductProps) {
-    return <>
-        <Card>
-            <Stack>
+    return  <>
+            <Stack component={Card}  overflow={'hidden'}>
                 <Box sx={{
                     position: 'relative'
                 }}>
                     <Box component={'img'}
                          sx={{
+                             p:1,
                              width: 1,
                              height: 1,
                              objectFit: 'cover',
                              //To remove extra space below image
-                             display: 'block'
+                             display: 'block',
+                             overflow:'hidden',
+                             borderRadius:2,
                          }}
                          src={cover}
                     ></Box>
@@ -30,7 +33,8 @@ export default function ProductCard({product: {id, name, cover, colors, price, s
                                       }}>{status}</Label>}
                 </Box>
                 <Stack spacing={2} sx={{p: 3}}>
-                    <Link color="inherit" underline="hover">
+                    <Link component={RouterLink}  to={`/dashboard/product/${id}`}
+                          color="inherit" underline="hover">
                         <Typography variant="subtitle2" noWrap>
                             {name}
                         </Typography>
@@ -49,6 +53,6 @@ export default function ProductCard({product: {id, name, cover, colors, price, s
                     </Stack>
                 </Stack>
             </Stack>
-        </Card>
-    </>
+        </>
+
 }

@@ -81,7 +81,11 @@ export const products = [...Array(24)].map((_, index) => {
         status: sample(['sale', 'new', '', '']),
     };
 });
-export const productDetails=  [...Array(24)].map ((_,index)=> ({sellableUnit: 2,averageRating:4, aggregatedRatings:[...Array(5)].map((_,index)=>({
+export const productDetails=  [...Array(24)].map ((_,index)=> ({
+    sellableUnit: 2,
+    totalReviews:24,
+    averageRating:4,
+    aggregatedRatings:[...Array(5)].map((_,index)=>({
     label:`${index+1} Star`,
     occurrence:faker.datatype.number({min:1000,max:10000}),
     value:faker.datatype.number({min:1,max:5,precision:0.1}),
@@ -91,17 +95,20 @@ export const productDetails=  [...Array(24)].map ((_,index)=> ({sellableUnit: 2,
     heading:faker.lorem.word(),
     detail:faker.lorem.lines(1),
 })),
-    ratings:[...Array(24)].map((_,index)=>({
-    user:users[index],
-    verifiedPurchase:true,
-    verifiedPurchaseText:'Verified Purchase',
-    stars:faker.datatype.number({min:1,max:5}),
-    review:faker.lorem.lines(2),
-    reviewTime:faker.date.past(),
-    helpfulText:'Was this review helpful to you?',
-    foundHelpful:faker.datatype.number()
+    ratingList:{
+        nextPage:-1,
+        ratings:[...Array(24)].map((_,index)=>({
+            user:users[index],
+            verifiedPurchase:true,
+            verifiedPurchaseText:'Verified Purchase',
+            stars:faker.datatype.number({min:1,max:5}),
+            review:faker.lorem.lines(2),
+            reviewTime:faker.date.past(),
+            helpfulText:'Was this review helpful to you?',
+            foundHelpful:faker.datatype.number()
 
-})),
+        }))
+    },
 ...products[index]}))
 const POST_TITLES = [
     'Whiteboard Templates By Industry Leaders',

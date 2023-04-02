@@ -4,7 +4,7 @@ import {useState} from "react";
 import {products} from "../temp/data";
 import {Helmet} from "react-helmet-async";
 
-export default function ProductsPage() {
+export default function ProductsListingPage() {
        const [openFilter, setOpenFilter]=useState(false)
     return <>
         <Helmet>

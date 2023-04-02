@@ -3,14 +3,22 @@ import {Navigate, useRoutes} from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
 //
-import {BlogPage, DashboardAppPage, LoginPage, Page404, ProductsPage, UserPage,} from './pages';
+import {
+    BlogPage,
+    DashboardAppPage,
+    LoginPage,
+    Page404,
+    ProductDetailPage,
+    ProductsListingPage,
+    UserPage,
+} from './pages';
 import MailLayout from "./layouts/dashboard/mail/MailLayout";
 import MailPage from "./pages/MailPage";
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
-    const routes = useRoutes([
+    return useRoutes([
         {
             path: '/dashboard',
             element: <DashboardLayout/>,
@@ -18,24 +26,25 @@ export default function Router() {
                 {element: <Navigate to="/dashboard/app"/>, index: true},
                 {path: 'app', element: <DashboardAppPage/>},
                 {path: 'user', element: <UserPage/>},
-                {path: 'products', element: <ProductsPage/>},
+                {path: 'products', element: <ProductsListingPage/>},
+                {path: 'product/:id', element: <ProductDetailPage/>},
                 {path: 'blog', element: <BlogPage/>},
                 {
                     path: 'mail',
                     element: <MailPage/>,
-                    children:[
+                    children: [
                         {element: <Navigate to="allMail"/>, index: true},
-                        {path:'allMail', element:<MailLayout/>},
-                        {path:'inbox', element:<MailLayout type={'inbox'}/>},
-                        {path:'sent', element:<MailLayout type={'sent'}/>},
-                        {path:'drafts', element:<MailLayout type={'drafts'}/>},
-                        {path:'trash', element:<MailLayout type={'trash'}/>},
-                        {path:'spam', element:<MailLayout type={'spam'}/>},
-                        {path:'important', element:<MailLayout type={'important'}/>},
-                        {path:'starred', element:<MailLayout type={'starred'}/>},
-                        {path:'social', element:<MailLayout type={'social'}/>},
-                        {path:'promotions', element:<MailLayout type={'promotions'}/>},
-                        {path:'forums', element:<MailLayout type={'forums'}/>},
+                        {path: 'allMail', element: <MailLayout/>},
+                        {path: 'inbox', element: <MailLayout type={'inbox'}/>},
+                        {path: 'sent', element: <MailLayout type={'sent'}/>},
+                        {path: 'drafts', element: <MailLayout type={'drafts'}/>},
+                        {path: 'trash', element: <MailLayout type={'trash'}/>},
+                        {path: 'spam', element: <MailLayout type={'spam'}/>},
+                        {path: 'important', element: <MailLayout type={'important'}/>},
+                        {path: 'starred', element: <MailLayout type={'starred'}/>},
+                        {path: 'social', element: <MailLayout type={'social'}/>},
+                        {path: 'promotions', element: <MailLayout type={'promotions'}/>},
+                        {path: 'forums', element: <MailLayout type={'forums'}/>},
                     ]
                 }
             ],
@@ -54,6 +63,4 @@ export default function Router() {
         },
 
     ]);
-
-    return routes;
 }
