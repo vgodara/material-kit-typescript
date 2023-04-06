@@ -8,6 +8,12 @@ interface Address {
     pinCode: string
 
 }
+interface DeliveryOption {
+    type: 'standard' | 'express'
+    title: string,
+    description: string
+}
+
 
 
 export interface AddressProps {
@@ -20,4 +26,13 @@ export interface BillingAddressProps {
     action?: () => void
 }
 
+export interface DeliveryOptionProps {
+    deliveryOption: DeliveryOption
+}
+
+export interface DeliveryOptionsProps {
+    deliveryOptions: DeliveryOption[]
+    defaultDeliveryOption: DeliveryOption['type']
+    setSelectedDeliveryOption: (type: DeliveryOption['type']) => void,
+}
 
