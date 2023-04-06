@@ -1,5 +1,4 @@
 import {
-    alpha,
     Box,
     Button,
     Divider,
@@ -23,10 +22,10 @@ import Label from "../../../components/label";
 import {ProductBuyBoxProps} from "./types";
 import {fCurrency, fShortenNumber} from "../../../utils/formatNumber";
 
-export default function ProductBuyBox({product}:ProductBuyBoxProps) {
+export default function ProductBuyBox({product}: ProductBuyBoxProps) {
 
     const sizes = [...Array(5)].map((_, index) => (index + 5))
-    let selectedSize=sample(sizes)!
+    let selectedSize = sample(sizes)!
     return <FormControl fullWidth component={'form'} sx={(theme) => ({
         padding: {md: theme.spacing(5, 5, 0, 2)},
     })}>
@@ -44,19 +43,16 @@ export default function ProductBuyBox({product}:ProductBuyBoxProps) {
     </FormControl>
 }
 
-function ProductDescription({product}:ProductBuyBoxProps) {
-    const {name,status,aggregatedRatings,price,priceSale,averageRating}= product
-    const outOfStock=product.sellableUnit<0
-    const totalReviews=aggregatedRatings.map((rating)=>(rating.occurrence)).reduce(((sum, rating)=>(sum+rating)),0)
+function ProductDescription({product}: ProductBuyBoxProps) {
+    const {name, status, aggregatedRatings, price, priceSale, averageRating} = product
+    const outOfStock = product.sellableUnit < 0
+    const totalReviews = aggregatedRatings.map((rating) => (rating.occurrence)).reduce(((sum, rating) => (sum + rating)), 0)
     return <Stack spacing={2}>
-        { <Label variant={'filled'}
-                               sx={{
-                                   marginRight:'auto',
-                                   color:(theme)=>outOfStock? theme.palette.error.darker:theme.palette.success.darker,
-                                   backgroundColor:(theme)=>  alpha(outOfStock? theme.palette.error.main:theme.palette.success.main, .16),
-                                   textTransform: 'uppercase',
-
-                               }}>{outOfStock?`Out of stock`:'in stock'}</Label>}
+        {<Label color={outOfStock?'error':'success'} variant={'soft'}
+                sx={{
+                    marginRight: 'auto',
+                    textTransform: 'uppercase',
+                }}>{outOfStock ? `Out of stock` : 'in stock'}</Label>}
 
         {status && <Typography color={status === 'sale' ? 'error' : 'info'} variant={'overline'}>
             {status}
@@ -73,14 +69,14 @@ function ProductDescription({product}:ProductBuyBoxProps) {
         <Typography variant={'h4'}>
             {priceSale &&
                 <Typography component={'span'} variant={'h4'} color={'text.disabled'}
-                            sx={{textDecoration: 'line-through', mr: 0.5}}>{fCurrency(price)}</Typography>  }
-            { fCurrency(priceSale ? priceSale :price)}
+                            sx={{textDecoration: 'line-through', mr: 0.5}}>{fCurrency(price)}</Typography>}
+            {fCurrency(priceSale ? priceSale : price)}
         </Typography>
     </Stack>
 }
 
 function ProductColorSelection({colors,setSelectedColor}:{colors:string[],setSelectedColor:(color:string)=>void}){
-    return  <Box sx={() => ({
+    return <Box sx={() => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -91,19 +87,19 @@ function ProductColorSelection({colors,setSelectedColor}:{colors:string[],setSel
 }
 function ProductSizeSelection({sizes,selectedSize,setSelectedSize}:{sizes:number[],selectedSize:number,setSelectedSize:(size:number)=>void}){
     const [size, setSize] = useState(selectedSize)
-    const handleSizeSelection=(event: SelectChangeEvent<number>)=>{
-        const size= event.target.value as number
+    const handleSizeSelection = (event: SelectChangeEvent<number>) => {
+        const size = event.target.value as number
         setSelectedSize(size)
         setSize(size)
 
     }
-    return  <Box sx={() => ({
+    return <Box sx={() => ({
         display: 'flex',
         justifyContent: 'space-between',
     })}>
         <Typography py={1} variant={'subtitle2'}>Size</Typography>
         <FormControl sx={{minWidth: 96}}>
-            <Select  size={'small'} value={size} onChange={handleSizeSelection}>
+            <Select size={'small'} value={size} onChange={handleSizeSelection}>
                 {sizes.map((size, index) => (<MenuItem value={size} key={index}>{size}</MenuItem>))}
             </Select>
             <FormHelperText sx={(theme) => ({m: theme.spacing(1, 0, 0, 0), textAlign: 'right'})}>
@@ -116,19 +112,13 @@ function ProductSizeSelection({sizes,selectedSize,setSelectedSize}:{sizes:number
     </Box>
 }
 function ProductQuantitySelection({availableQuantity,setSelectedQuantity}:{availableQuantity:number,setSelectedQuantity:(quantity:number)=>void}){
-    return  <Box sx={() => ({
+    return <Box sx={() => ({
         display: 'flex',
         justifyContent: 'space-between',
     })}>
         <Typography py={1} variant={'subtitle2'}>Quantity</Typography>
-        <FormControl>
-            <Counter initial={1} max={availableQuantity} min={1} setQuantity={setSelectedQuantity}/>
-            <FormHelperText sx={(theme) => ({m: theme.spacing(1, 0, 0, 0), textAlign: 'right'})}>
-                <Typography variant="caption">
-                    {`Available ${availableQuantity}`}
-                </Typography>
-            </FormHelperText>
-        </FormControl>
+        <Counter initial={1} helperText={`Available ${availableQuantity}`} max={availableQuantity} min={1}
+                 setQuantity={setSelectedQuantity}/>
     </Box>
 }
 
