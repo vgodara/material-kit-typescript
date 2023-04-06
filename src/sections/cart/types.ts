@@ -45,6 +45,18 @@ interface CreditCardInfo extends PaymentInfoBase<'credit' | 'debit'> {
 interface ThirdPartyPaymentOption extends PaymentInfoBase<'paypal' | 'cod'> {
 }
 
+interface Product{
+    id:string
+    name:string,
+    cover:string,
+    selectedColor:string,
+    selectedSize:string
+    selectedQuantity:number,
+    availableQuantity:number,
+    sellingPrice:number,
+    totalPrice:number,
+}
+
 export interface PaymentOptionProps {
     paymentOption: CreditCardInfo | ThirdPartyPaymentOption;
 
@@ -75,4 +87,12 @@ export interface OrderSummaryProps {
     setCurrentStep:(step:number)=>void
     order:OrderSummery
     onApplyCoupon:(coupon:string)=>boolean
+}
+export interface ItemToBuyProps{
+    product:Product
+    onQuantityChange:(productId:string,selectedQuantity:number)=>void
+}
+export interface ItemsToBuyProps{
+    products:Product[]
+    onQuantityChange:(productId:string,selectedQuantity:number)=>void
 }
