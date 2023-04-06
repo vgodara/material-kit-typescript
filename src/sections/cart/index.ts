@@ -1,6 +1,6 @@
 export {default as AddressSection} from './Address'
 export {default as BillingAddressSection} from './BillingAddress'
-export {default as DeliveryAddressSection} from './DeliveryOptions'
+export {default as DeliveryOptionSection} from './DeliveryOptions'
 export {default as OrderSummarySection} from './OrderSummary'
 export {default as PaymentOptionsSection} from './PaymentOptions'
 export {default as ItemsToBuySection} from './ItemsToBuy'
