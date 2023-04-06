@@ -5,6 +5,7 @@ import {User} from "../sections/@dashboard/user/types";
 import {BlogPostSortOption} from "../sections/@dashboard/blog/types";
 import {LabelType} from "../sections/@dashboard/mail/MailItem";
 import {fDate} from "../utils/formatTime";
+import {ProductList} from "../sections/@dashboard/product/types";
 
 export const TABLE_HEAD: HeadCell<User>[] = [
     {id: 'name', label: 'Name', alignRight: false},
@@ -79,39 +80,42 @@ export const products = [...Array(24)].map((_, index) => {
             (setIndex === 23 && PRODUCT_COLOR.slice(4, 6)) ||
             (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
             PRODUCT_COLOR,
-        sizes : [...Array(5)].map((_, index) => (`${index + 5}`)),
-        status: sample(['sale', 'new', '', '']),
+        sizes: [...Array(5)].map((_, index) => (`${index + 5}`)),
+        status: sample(['sale', 'new', '', ''])!,
+        createdAt: faker.date.past(),
+        stock:sample(['low stock','out of stock','in stock'])!,
     };
 });
-export const productDetails=  [...Array(24)].map ((_,index)=> ({
+export const productDetails = [...Array(24)].map((_, index) => ({
     sellableUnit: 2,
-    totalReviews:24,
-    averageRating:4,
-    aggregatedRatings:[...Array(5)].map((_,index)=>({
-    label:`${index+1} Star`,
-    occurrence:faker.datatype.number({min:1000,max:10000}),
-    value:faker.datatype.number({min:1,max:5,precision:0.1}),
+    totalReviews: 24,
+    averageRating: 4,
+    aggregatedRatings: [...Array(5)].map((_, index) => ({
+        label: `${index + 1} Star`,
+        occurrence: faker.datatype.number({min: 1000, max: 10000}),
+        value: faker.datatype.number({min: 1, max: 5, precision: 0.1}),
 
-}))
-    ,descriptions:[...Array(5)].map(()=>({
-    heading:faker.lorem.word(),
-    detail:faker.lorem.lines(1),
-})),
-    ratingList:{
-        nextPage:-1,
-        ratings:[...Array(24)].map((_,index)=>({
-            user:users[index],
-            verifiedPurchase:true,
-            verifiedPurchaseText:'Verified Purchase',
-            stars:faker.datatype.number({min:1,max:5}),
-            review:faker.lorem.lines(2),
-            reviewTime:faker.date.past(),
-            helpfulText:'Was this review helpful to you?',
-            foundHelpful:faker.datatype.number()
+    }))
+    , descriptions: [...Array(5)].map(() => ({
+        heading: faker.lorem.word(),
+        detail: faker.lorem.lines(1),
+    })),
+    ratingList: {
+        nextPage: -1,
+        ratings: [...Array(24)].map((_, index) => ({
+            user: users[index],
+            verifiedPurchase: true,
+            verifiedPurchaseText: 'Verified Purchase',
+            stars: faker.datatype.number({min: 1, max: 5}),
+            review: faker.lorem.lines(2),
+            reviewTime: faker.date.past(),
+            helpfulText: 'Was this review helpful to you?',
+            foundHelpful: faker.datatype.number()
 
         }))
     },
-...products[index]}))
+    ...products[index]
+}))
 const POST_TITLES = [
     'Whiteboard Templates By Industry Leaders',
     'Tesla Cybertruck-inspired camper trailer for Tesla fans who can’t just wait for the truck!',
@@ -163,7 +167,7 @@ export const account = {
     displayName: 'Jaydon Frankie',
     email: 'demo@minimals.cc',
     photoURL: '/assets/images/avatars/avatar_default.jpg',
-    role:'admin',
+    role: 'admin',
 };
 
 export const emailNav = [
@@ -171,70 +175,70 @@ export const emailNav = [
         icon: 'eva:email-fill',
         name: "all mail",
         count: 3,
-        path:'allmail',
+        path: 'allmail',
     },
     {
         icon: 'eva:inbox-fill',
         name: "inbox",
         count: 1,
-        path:'inbox',
+        path: 'inbox',
     },
     {
         icon: 'ic:round-send',
         name: "sent",
         count: 0,
-        path:'sent',
+        path: 'sent',
     },
     {
         icon: 'eva:file-fill',
         name: "drafts",
         count: 0,
-        path:'drafts',
+        path: 'drafts',
     },
     {
         icon: 'eva:trash-2-outline',
         name: "trash",
         count: 0,
-        path:'trash',
+        path: 'trash',
     },
     {
         icon: 'ri:spam-2-fill',
         name: "spam",
         count: 1,
-        path:'spam',
+        path: 'spam',
     },
     {
         icon: 'ic:round-label-important',
         name: "important",
         count: 1,
-        path:'important',
+        path: 'important',
     },
     {
         icon: 'eva:star-fill',
         name: "starred",
         count: 1,
-        path:'starred',
+        path: 'starred',
     },
     {
         icon: 'ic:round-label',
         name: "social",
         count: 0,
         color: 'success',
-        path:'social',
+        path: 'social',
     },
     {
         icon: 'ic:round-label',
         name: "promotions",
         count: 2,
         color: 'warning',
-        path:'promotions',
+        path: 'promotions',
     },
     {
         icon: 'ic:round-label',
         name: "forums",
         count: 0,
         color: 'error',
-        path:'forums',
+        path: 'forums',
     }
 ]
 export type MailType = 'inbox'
@@ -263,7 +267,7 @@ export const mails = Array.from(Array(faker.datatype.number({min: 20, max: 50}))
             max: 5
         })
     }, () => sample(['social', 'promotions', 'forums'])!) as LabelType[],
-    type:Array.from({
+    type: Array.from({
         length: faker.datatype.number({
             min: 0,
             max: 5
@@ -272,7 +276,7 @@ export const mails = Array.from(Array(faker.datatype.number({min: 20, max: 50}))
         'forums'])!) as MailType[]
 }))
 
-export const paymentOptions=[...Array(4)].map((_,index)=>(
+export const paymentOptions = [...Array(4)].map((_, index) => (
     {
         setSelectedCard: (value: number) => {
             console.log(value)
@@ -285,32 +289,33 @@ export const paymentOptions=[...Array(4)].map((_,index)=>(
                 value: index,
                 label: faker.lorem.words(5)
             }
-        ))}))
+        ))
+    }))
 
-export const addresses= [...Array(5)].map((_,index)=>(
+export const addresses = [...Array(5)].map((_, index) => (
     {
-        id:faker.datatype.uuid(),
-        isDefault:index===1,
-        name:faker.name.fullName(),
-        type:faker.lorem.word(),
-        address:faker.address.streetAddress(true),
-        pinCode:faker.address.zipCode()
+        id: faker.datatype.uuid(),
+        isDefault: index === 1,
+        name: faker.name.fullName(),
+        type: faker.lorem.word(),
+        address: faker.address.streetAddress(true),
+        pinCode: faker.address.zipCode()
     }
 ))
 
 export const itemsToBuy = productDetails.slice(faker.datatype.number({
     min: 0,
     max: productDetails.length
-}), faker.datatype.number({min: 0, max: productDetails.length})).map((product)=>({
-    id:product.id,
-    name:product.name,
-    cover:product.cover,
-    selectedColor:sample(product.colors)!,
-    selectedSize:sample(product.sizes)!,
-    selectedQuantity:faker.datatype.number({min:1,max:product.sellableUnit}),
-    availableQuantity:product.sellableUnit,
-    sellingPrice:product.priceSale??product.price,
-    totalPrice:(product.priceSale??product.price)*faker.datatype.number({min:1,max:product.sellableUnit}),
+}), faker.datatype.number({min: 0, max: productDetails.length})).map((product) => ({
+    id: product.id,
+    name: product.name,
+    cover: product.cover,
+    selectedColor: sample(product.colors)!,
+    selectedSize: sample(product.sizes)!,
+    selectedQuantity: faker.datatype.number({min: 1, max: product.sellableUnit}),
+    availableQuantity: product.sellableUnit,
+    sellingPrice: product.priceSale ?? product.price,
+    totalPrice: (product.priceSale ?? product.price) * faker.datatype.number({min: 1, max: product.sellableUnit}),
 }))
 export const deliveryOptions = [...Array(2)].map((_, index) => ({
     type: index === 0 ? 'standard' : 'express' as ('standard' | 'express'),
@@ -325,3 +330,11 @@ export const order = {
     total: faker.datatype.number({min: 100, max: 500}),
 
 }
+
+export const PRODUCT_TABLE_HEAD: HeadCell<ProductList>[] = [
+    {id: 'name', label: 'Name', alignRight: false},
+    {id: 'createdAt', label: 'Created at', alignRight: false},
+    {id: 'status', label: 'Status', alignRight: false},
+    {id: 'price', label: 'Price', alignRight: false},
+    {id: 'id'}
+];

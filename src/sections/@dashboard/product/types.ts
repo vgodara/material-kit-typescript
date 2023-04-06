@@ -1,14 +1,16 @@
 import {SxProps, Theme} from "@mui/material";
 import {User} from "../user/types";
 
-interface ProductList {
+export interface ProductList {
     id: string,
     cover: string,
     name: string,
     price: number,
     priceSale?: number,
     colors: string[],
-    status?: string
+    status?: string,
+    stock:string,
+    createdAt:Date
 }
 
 interface Rating {
@@ -59,4 +61,9 @@ export interface ShopFilterSidebarProps {
     openFilter: boolean
 
     setOpenFilter: (shouldOpen: boolean) => void
+}
+export interface ProductListToolbarProps{
+    numberOfProductSelected:number
+    searchText:string,
+    onSearchText:(searchText:string)=>void
 }
