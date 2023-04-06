@@ -8,12 +8,12 @@ export const ColorPreview = forwardRef<unknown, ColorPreviewProps>(({sx, limit=3
     const showColor = colors.slice(0, limit);
     const moreColor = colors.length - limit;
     return <Stack component={'span'}
-                  sx={{display: 'flex',flexDirection:'row',alignItems:'center',justifyContent:'flex-end'}}>
-        {showColor.map(color => {
-            return <Box key={color} component={'span'} sx={{
+                  sx={{display: 'flex',flexDirection:'row',alignItems:'center',justifyContent:'flex-end',...sx}}>
+        {showColor.map((color,index) => {
+            return <Box key={index} component={'span'} sx={{
                 height: 16,
                 width: 16,
-                ml: -0.75,
+                ml: (index!==0 ? -0.75:0),
                 border: (theme) => `solid 2px ${theme.palette.background.paper}`,
                 boxShadow: (theme) => `inset -1px 1px 2px ${alpha(theme.palette.common.black, 0.24)}`,
                 backgroundColor: color,
