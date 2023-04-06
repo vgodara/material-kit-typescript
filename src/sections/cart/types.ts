@@ -20,6 +20,13 @@ export interface AddressProps {
     address: Address
     onAddressSelection: (id: string) => void
 }
+interface OrderSummery {
+
+    subTotal: number,
+    discount: number,
+    shippingCharge: number | string
+    total: number
+}
 
 export interface BillingAddressProps {
     address: Address
@@ -36,3 +43,9 @@ export interface DeliveryOptionsProps {
     setSelectedDeliveryOption: (type: DeliveryOption['type']) => void,
 }
 
+export interface OrderSummaryProps {
+    currentStep:number,
+    setCurrentStep:(step:number)=>void
+    order:OrderSummery
+    onApplyCoupon:(coupon:string)=>boolean
+}
