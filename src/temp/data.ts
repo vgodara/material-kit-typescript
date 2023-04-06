@@ -78,6 +78,7 @@ export const products = [...Array(24)].map((_, index) => {
             (setIndex === 23 && PRODUCT_COLOR.slice(4, 6)) ||
             (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
             PRODUCT_COLOR,
+        sizes : [...Array(5)].map((_, index) => (`${index + 5}`)),
         status: sample(['sale', 'new', '', '']),
     };
 });
@@ -269,3 +270,29 @@ export const mails = Array.from(Array(faker.datatype.number({min: 20, max: 50}))
     }, () => sample(['inbox', 'sent', 'drafts', 'trash', 'spam', 'important', 'starred', 'social', 'promotions',
         'forums'])!) as MailType[]
 }))
+
+export const paymentOptions=[...Array(4)].map((_,index)=>(
+    {
+        setSelectedCard: (value: number) => {
+            console.log(value)
+        },
+        title: faker.lorem.words(3),
+        description: faker.lorem.lines(3),
+        type: ['credit', 'debit', 'paypal', 'cod'][index] as 'credit' | 'debit' | 'paypal' | 'cod',
+        icons: [...Array(2)].map((_, index) => (index === 0 ? '/assets/icons/payments/ic_visa.svg' : '/assets/icons/payments/ic_mastercard.svg')),
+        savedCards: [...Array(3)].map((_, index) => ({
+                value: index,
+                label: faker.lorem.words(5)
+            }
+        ))}))
+
+export const addresses= [...Array(5)].map((_,index)=>(
+    {
+        id:faker.datatype.uuid(),
+        isDefault:index===1,
+        name:faker.name.fullName(),
+        type:faker.lorem.word(),
+        address:faker.address.streetAddress(true),
+        pinCode:faker.address.zipCode()
+    }
+))
