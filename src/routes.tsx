@@ -14,6 +14,7 @@ import {
 } from './pages';
 import MailLayout from "./layouts/dashboard/mail/MailLayout";
 import MailPage from "./pages/MailPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +30,7 @@ export default function Router() {
                 {path: 'products', element: <ProductsListingPage/>},
                 {path: 'product/:id', element: <ProductDetailPage/>},
                 {path: 'blog', element: <BlogPage/>},
+                {path: 'checkout' ,element: <CheckoutPage/>},
                 {
                     path: 'mail',
                     element: <MailPage/>,
