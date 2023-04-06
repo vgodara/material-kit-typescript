@@ -15,6 +15,9 @@ export interface AddressProps {
     onAddressSelection: (id: string) => void
 }
 
-
+export interface BillingAddressProps {
+    address: Address
+    action?: () => void
+}
 
 
