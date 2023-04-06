@@ -1,4 +1,4 @@
-import {TableHead} from "../../../components/table/TableHead";
+import {TableHead} from "../../../components/table/";
 import {User} from "./types";
 import {EnhancedTableProps} from "../../../components/table/types";
 

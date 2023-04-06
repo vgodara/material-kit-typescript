@@ -3,7 +3,7 @@ import React from "react";
 import {Box, Checkbox, TableCell, TableHead as MuiTableHead, TableRow, TableSortLabel} from "@mui/material";
 import {visuallyHidden} from '@mui/utils';
 
-export function TableHead<T>({
+export default function TableHead<T>({
                                  headCells,
                                  numSelected,
                                  onRequestSort,

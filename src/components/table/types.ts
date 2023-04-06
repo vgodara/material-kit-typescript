@@ -16,3 +16,9 @@ export interface EnhancedTableProps<T> {
     orderBy: keyof T;
     rowCount: number;
 }
+export interface TableToolBarProps{
+    numSelected: number,
+    searchText: string,
+    onSearchText: (searchText: string) => void
+    searchHint:string
+}
