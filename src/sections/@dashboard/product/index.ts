@@ -5,3 +5,5 @@ export {default as ProductCartWidget} from './ProductCartWidget';
 export {default as ProductFilterSidebar} from './ProductFilterSidebar';
 export {default as ProductBuyBox} from './ProductBuyBox'
 export {default as ProductDescription} from './ProductDescription'
+export {default as ProductListToolbarSection} from './ProductListToolbar'
+export {default as ProductListHeadSection} from './ProductListHead'
