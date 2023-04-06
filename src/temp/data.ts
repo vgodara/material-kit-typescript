@@ -4,6 +4,7 @@ import {HeadCell} from "../components/table/types";
 import {User} from "../sections/@dashboard/user/types";
 import {BlogPostSortOption} from "../sections/@dashboard/blog/types";
 import {LabelType} from "../sections/@dashboard/mail/MailItem";
+import {fDate} from "../utils/formatTime";
 
 export const TABLE_HEAD: HeadCell<User>[] = [
     {id: 'name', label: 'Name', alignRight: false},
@@ -296,3 +297,31 @@ export const addresses= [...Array(5)].map((_,index)=>(
         pinCode:faker.address.zipCode()
     }
 ))
+
+export const itemsToBuy = productDetails.slice(faker.datatype.number({
+    min: 0,
+    max: productDetails.length
+}), faker.datatype.number({min: 0, max: productDetails.length})).map((product)=>({
+    id:product.id,
+    name:product.name,
+    cover:product.cover,
+    selectedColor:sample(product.colors)!,
+    selectedSize:sample(product.sizes)!,
+    selectedQuantity:faker.datatype.number({min:1,max:product.sellableUnit}),
+    availableQuantity:product.sellableUnit,
+    sellingPrice:product.priceSale??product.price,
+    totalPrice:(product.priceSale??product.price)*faker.datatype.number({min:1,max:product.sellableUnit}),
+}))
+export const deliveryOptions = [...Array(2)].map((_, index) => ({
+    type: index === 0 ? 'standard' : 'express' as ('standard' | 'express'),
+    title: faker.lorem.words(1),
+    description: `Delivered on ${fDate(faker.date.soon(20))}`
+}))
+export const order = {
+
+    subTotal: faker.datatype.number({min: 100, max: 500}),
+    discount: faker.datatype.number({min: 0, max: 10}),
+    shippingCharge: faker.datatype.number({min: 1, max: 20}),
+    total: faker.datatype.number({min: 100, max: 500}),
+
+}

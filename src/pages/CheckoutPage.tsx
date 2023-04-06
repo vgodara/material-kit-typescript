@@ -10,9 +10,8 @@ import {
     OrderSummarySection,
     PaymentOptionsSection
 } from "../sections/cart";
-import {addresses, paymentOptions, productDetails} from "../temp/data";
+import {addresses, deliveryOptions, itemsToBuy, order, paymentOptions} from "../temp/data";
 import {faker} from "@faker-js/faker";
-import {fDate} from "../utils/formatTime";
 
 import {sample} from "lodash";
 
@@ -24,33 +23,6 @@ export default function CheckoutPage() {
     ];
     const [currentStep, setCurrentStep] = useState(0)
 
-    const itemsToBuy = productDetails.slice(faker.datatype.number({
-        min: 0,
-        max: productDetails.length
-    }), faker.datatype.number({min: 0, max: productDetails.length})).map((product)=>({
-        id:product.id,
-        name:product.name,
-        cover:product.cover,
-        selectedColor:sample(product.colors)!,
-        selectedSize:sample(product.sizes)!,
-        selectedQuantity:faker.datatype.number({min:1,max:product.sellableUnit}),
-        availableQuantity:product.sellableUnit,
-        sellingPrice:product.priceSale??product.price,
-        totalPrice:(product.priceSale??product.price)*faker.datatype.number({min:1,max:product.sellableUnit}),
-    }))
-    const deliveryOptions = [...Array(2)].map((_, index) => ({
-        type: index === 0 ? 'standard' : 'express' as ('standard' | 'express'),
-        title: faker.lorem.words(1),
-        description: `Delivered on ${fDate(faker.date.soon(20))}`
-    }))
-    const order = {
-
-        subTotal: faker.datatype.number({min: 100, max: 500}),
-        discount: faker.datatype.number({min: 0, max: 10}),
-        shippingCharge: faker.datatype.number({min: 1, max: 20}),
-        total: faker.datatype.number({min: 100, max: 500}),
-
-    }
 
 
     function handleAddressSelection(id: string) {
