@@ -27,7 +27,34 @@ interface OrderSummery {
     shippingCharge: number | string
     total: number
 }
+interface PaymentInfoBase<T extends string> {
+    title: string;
+    description: string;
+    icons: string[];
+    type: T;
+}
 
+interface CreditCardInfo extends PaymentInfoBase<'credit' | 'debit'> {
+    savedCards: {
+        value: number;
+        label: string;
+    }[];
+    setSelectedCard: (value: number) => void
+}
+
+interface ThirdPartyPaymentOption extends PaymentInfoBase<'paypal' | 'cod'> {
+}
+
+export interface PaymentOptionProps {
+    paymentOption: CreditCardInfo | ThirdPartyPaymentOption;
+
+}
+
+export interface PaymentOptionsProps {
+    paymentOptions: (CreditCardInfo | ThirdPartyPaymentOption) []
+    defaultPaymentOption: 'credit' | 'debit' | 'paypal' | 'cod'
+    setSelectedPaymentOption: (type: 'credit' | 'debit' | 'paypal' | 'cod') => void
+}
 export interface BillingAddressProps {
     address: Address
     action?: () => void
