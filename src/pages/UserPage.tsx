@@ -27,7 +27,7 @@ import {User} from "../sections/@dashboard/user/types";
 import {Order} from "../components/table/types";
 import Scrollbar from "../components/scrollbar";
 import {Helmet} from "react-helmet-async";
-import {stableSort} from "../utils/helper";
+import {descendingComparator, stableSort} from "../utils/helper";
 
 
 
@@ -71,15 +71,7 @@ export default function UserPage() {
         setPage(0);
     }
 
-    function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-        if (b[orderBy] < a[orderBy]) {
-            return -1;
-        }
-        if (b[orderBy] > a[orderBy]) {
-            return 1;
-        }
-        return 0;
-    }
+
 
     function getComparator(): (
         a: User,
