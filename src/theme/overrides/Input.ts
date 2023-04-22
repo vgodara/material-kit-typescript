@@ -61,8 +61,24 @@ export default function Input(theme: Theme) {
                             borderColor: theme.palette.action.disabledBackground,
                         },
                     },
+                    '&.Mui-focused': {
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: theme.palette.text.primary,
+                            borderWidth:'1px',
+                        },
+                    }
                 },
             },
         },
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {
+                    '&.Mui-focused': {
+                        color: theme.palette.text.primary,
+                    },
+                },
+            }
+
+        }
     };
 }
