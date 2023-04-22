@@ -20,11 +20,11 @@ import {
 } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import {useState} from "react";
-import {Quill} from "../components/quill";
-import {MultipleFileDropzone} from "../components/dropzone/index";
-import Breadcrumbs from "../sections/navigation/Breadcrumbs";
+import {Quill} from "../../../components/quill";
+import {MultipleFileDropzone} from "../../../components/dropzone";
+import Breadcrumbs from "../../../sections/navigation/Breadcrumbs";
 
-export default function CreateProductPage() {
+export default function ProductCreatePage() {
     const [productName, setProductName] = useState('')
 
     const [description, setDescription] = useState<string>('');

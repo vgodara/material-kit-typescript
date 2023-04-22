@@ -1,7 +1,7 @@
 import {Container, Stack, Typography} from "@mui/material";
-import {ProductCartWidget, ProductFilterSidebar, ProductList, ProductSort} from "../sections/@dashboard/product";
+import {ProductCartWidget, ProductFilterSidebar, ProductList, ProductSort} from "../../../sections/@dashboard/product";
 import {useState} from "react";
-import {products} from "../temp/data";
+import {products} from "../../../temp/data";
 import {Helmet} from "react-helmet-async";
 
 export default function ProductsListingPage() {

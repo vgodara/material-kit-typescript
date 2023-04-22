@@ -1,8 +1,7 @@
-export {default as BlogPage} from './BlogPage'
-export {default as LoginPage} from './LoginPage'
+
 export {default as Page404} from './Page404'
-export {default as ProductsListingPage} from './ProductsListingPage'
-export {default as UserPage} from './UserPage'
+export {UserPage,LoginPage} from './users'
 export {default as DashboardAppPage} from './DashboardAppPage'
 export {default as MailPage} from './MailPage'
-export {default as ProductDetailPage} from './ProductDetailPage'
+export {ProductCreatePage,ProductListPage,ProductsListingPage,ProductDetailPage,CheckoutPage} from './products'
+export { BlogPage} from './blogs'

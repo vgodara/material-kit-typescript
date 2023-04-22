@@ -1,10 +1,10 @@
 import {Box, Container, Stack, Typography} from "@mui/material";
-import Breadcrumbs from "../sections/navigation/Breadcrumbs";
-import {productDetails} from "../temp/data";
+import Breadcrumbs from "../../../sections/navigation/Breadcrumbs";
+import {productDetails} from "../../../temp/data";
 import {faker} from "@faker-js/faker";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import {Carousel} from "../components/carousel";
-import {ProductBuyBox, ProductDescription} from "../sections/@dashboard/product";
+import {Carousel} from "../../../components/carousel";
+import {ProductBuyBox, ProductDescription} from "../../../sections/@dashboard/product";
 import {useParams} from "react-router-dom";
 
 export default function ProductDetailPage() {

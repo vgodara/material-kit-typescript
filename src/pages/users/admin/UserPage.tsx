@@ -17,17 +17,17 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import Iconify from "../components/iconify";
-import {UserListHead, UserListToolbar} from "../sections/@dashboard/user";
-import {TABLE_HEAD, users} from "../temp/data";
+import Iconify from "../../../components/iconify";
+import {UserListHead, UserListToolbar} from "../../../sections/@dashboard/user";
+import {TABLE_HEAD, users} from "../../../temp/data";
 import {sentenceCase} from "change-case";
-import Label from "../components/label";
+import Label from "../../../components/label";
 import React, {useState} from "react";
-import {User} from "../sections/@dashboard/user/types";
-import {Order} from "../components/table/types";
-import Scrollbar from "../components/scrollbar";
+import {User} from "../../../sections/@dashboard/user/types";
+import {Order} from "../../../components/table/types";
+import Scrollbar from "../../../components/scrollbar";
 import {Helmet} from "react-helmet-async";
-import {descendingComparator, stableSort} from "../utils/helper";
+import {descendingComparator, stableSort} from "../../../utils/helper";
 
 
 
@@ -82,7 +82,7 @@ export default function UserPage() {
             : (a, b) => -descendingComparator(a, b, orderBy);
     }
 
-    function handleCloseMenu(event: React.MouseEvent<HTMLButtonElement>) {
+    function handleCloseMenu(_: React.MouseEvent<HTMLButtonElement>) {
         setOpen(null)
     }
     const filteredUser=stableSort(users, getComparator()).filter((user)=>user.name.toLowerCase().includes(filterName.toLowerCase()))
@@ -119,7 +119,7 @@ export default function UserPage() {
                                                   isVerified,
                                                   status,
                                                   role
-                                              }, index) => {
+                                              }) => {
                                             const isSelected = selected.has(id)
                                             return <TableRow hover key={id} tabIndex={-1} role="checkbox"
                                                              selected={isSelected}>

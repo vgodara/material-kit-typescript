@@ -17,20 +17,20 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import Breadcrumbs from "../sections/navigation/Breadcrumbs";
-import Iconify from "../components/iconify";
+import Breadcrumbs from "../../../sections/navigation/Breadcrumbs";
+import Iconify from "../../../components/iconify";
 import React, {useState} from "react";
-import ProductListToolbar from "../sections/@dashboard/product/ProductListToolbar";
-import {ProductList} from "../sections/@dashboard/product/types";
-import {Order} from "../components/table/types";
-import {PRODUCT_TABLE_HEAD, products, TABLE_HEAD} from "../temp/data";
-import {descendingComparator, stableSort} from "../utils/helper";
-import Scrollbar from "../components/scrollbar";
-import ProductListHead from "../sections/@dashboard/product/ProductListHead";
-import Label from "../components/label";
+import ProductListToolbar from "../../../sections/@dashboard/product/ProductListToolbar";
+import {ProductList} from "../../../sections/@dashboard/product/types";
+import {Order} from "../../../components/table/types";
+import {PRODUCT_TABLE_HEAD, products, TABLE_HEAD} from "../../../temp/data";
+import {descendingComparator, stableSort} from "../../../utils/helper";
+import Scrollbar from "../../../components/scrollbar";
+import ProductListHead from "../../../sections/@dashboard/product/ProductListHead";
+import Label from "../../../components/label";
 import {sentenceCase} from "change-case";
-import {fDate} from "../utils/formatTime";
-import {fCurrency} from "../utils/formatNumber";
+import {fDate} from "../../../utils/formatTime";
+import {fCurrency} from "../../../utils/formatNumber";
 
 export default function ProductListPage() {
     const [selectedProducts, setSelectedProducts] = useState<string[]>(Array(0))

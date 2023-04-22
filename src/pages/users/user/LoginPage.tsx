@@ -1,8 +1,8 @@
 import {Box, Button, Container, Divider, Link, Stack, Typography} from "@mui/material";
-import {Logo} from "../components/logo";
-import Iconify from "../components/iconify";
-import {LoginForm} from "../sections/auth";
-import useResponsive from "../hooks/useResponsive";
+import {Logo} from "../../../components/logo";
+import Iconify from "../../../components/iconify";
+import {LoginForm} from "../../../sections/auth";
+import useResponsive from "../../../hooks/useResponsive";
 
 
 export default function LoginPage() {

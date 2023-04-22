@@ -1,5 +1,5 @@
 import {Box, Container, Step, StepLabel, Stepper, Typography} from "@mui/material";
-import Breadcrumbs from "../sections/navigation/Breadcrumbs";
+import Breadcrumbs from "../../../sections/navigation/Breadcrumbs";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import {useState} from "react";
 import {
@@ -9,8 +9,8 @@ import {
     ItemsToBuySection,
     OrderSummarySection,
     PaymentOptionsSection
-} from "../sections/cart";
-import {addresses, deliveryOptions, itemsToBuy, order, paymentOptions} from "../temp/data";
+} from "../../../sections/cart";
+import {addresses, deliveryOptions, itemsToBuy, order, paymentOptions} from "../../../temp/data";
 import {faker} from "@faker-js/faker";
 
 import {sample} from "lodash";

@@ -1,6 +1,6 @@
 import {Navigate, useRoutes} from 'react-router-dom';
 // layouts
-import DashboardLayout from './layouts/dashboard';
+import {DashboardLayout ,MailLayout} from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
 //
 import {
@@ -11,10 +11,8 @@ import {
     ProductDetailPage,
     ProductsListingPage,
     UserPage,
+    CheckoutPage, MailPage
 } from './pages';
-import MailLayout from "./layouts/dashboard/mail/MailLayout";
-import MailPage from "./pages/MailPage";
-import CheckoutPage from "./pages/CheckoutPage";
 
 // ----------------------------------------------------------------------
 

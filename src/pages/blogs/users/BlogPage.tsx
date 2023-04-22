@@ -1,8 +1,8 @@
 import {Helmet} from "react-helmet-async";
 import {Button, Container, Stack, Typography} from "@mui/material";
-import Iconify from "../components/iconify";
-import {BlogPostCard, BlogPostsSearch, BlogPostsSort} from "../sections/@dashboard/blog";
-import {posts, SORT_OPTIONS} from "../temp/data";
+import Iconify from "../../../components/iconify";
+import {BlogPostCard, BlogPostsSearch, BlogPostsSort} from "../../../sections/@dashboard/blog";
+import {posts, SORT_OPTIONS} from "../../../temp/data";
 import Grid2 from "@mui/material/Unstable_Grid2";
 
 export default function BlogPage() {
