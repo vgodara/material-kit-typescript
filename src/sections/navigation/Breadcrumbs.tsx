@@ -21,7 +21,8 @@ const Link = styled(MuiLink)<IsDisabled>(({theme, disabled}) => ({
             cursor: "default",
             "&:hover": {
                 textDecoration: "none"
-            }
+            },
+            ...theme.typography.subtitle2,
         }
     })
 }))
