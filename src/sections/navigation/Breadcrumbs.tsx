@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Breadcrumbs as MuiBreadcrumbs, Link as MuiLink, styled, SxProps, Theme} from "@mui/material";
+import {Box, Breadcrumbs as MuiBreadcrumbs, Link, styled, SxProps, Theme} from "@mui/material";
 
 type BreadcrumbLink = {
     label: string
@@ -11,21 +11,7 @@ interface BreadcrumbsProps {
     sx?: SxProps<Theme>
 }
 
-type IsDisabled = {
-    disabled: boolean
-}
-const Link = styled(MuiLink)<IsDisabled>(({theme, disabled}) => ({
-    ...(disabled && {
-        "&[disabled]": {
-            color: theme.palette.text.disabled,
-            cursor: "default",
-            "&:hover": {
-                textDecoration: "none"
-            },
-            ...theme.typography.subtitle2,
-        }
-    })
-}))
+
 const Separator = styled(Box)(({theme}) => ({
     width: 4,
     height: 4,
@@ -43,19 +29,19 @@ export default function Breadcrumbs({list, sx}: BreadcrumbsProps) {
             ...sx}
         }
         >
-            {list.map(({label, link}, index) => {
-                const isLast = index === list.length - 1
-                return <Link
+            {list.map(({label, link}, index) => (
+                <Link
+                    component="button"
+                    color={'text.primary'}
                     key={index}
                     underline="hover"
-                    color={isLast ? 'text.disabled' : 'text.primary'}
-                    href={isLast ? '' : link}
-                    disabled={isLast}
+                    href={link}
                     variant={'body2'}
+                    disabled={index === list.length - 1}
                 >
                     {label}
                 </Link>
-            })}
+            ))}
         </MuiBreadcrumbs>
     </>
 }
