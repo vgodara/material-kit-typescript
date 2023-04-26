@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, CardHeader, Stack, Typography} from "@mui/material";
+import {Box, Stack, Typography} from "@mui/material";
 import {useDropzone} from "react-dropzone";
 import React, {useState} from "react";
 import {alpha} from "@mui/material/styles";
@@ -22,9 +22,7 @@ export default function UploadAvatar() {
             'image/*': []
         }
     });
-    return <Card>
-        <CardHeader title={'Upload Avatar'}/>
-        <CardContent component={Stack} alignItems={'center'}  spacing={2}>
+    return <Stack alignItems={'center'}  spacing={2}>
             <Stack sx={{
                 position:'relative',
                 height:144,
@@ -71,6 +69,6 @@ export default function UploadAvatar() {
             </Stack>
             <Typography color={'text.secondary'} textAlign={'center'} variant={'caption'}>Allowed *.jpeg, *.jpg, *.png, *.gif
                 <br/> max size of 3.1 MB</Typography>
-        </CardContent>
-    </Card>
+        </Stack>
+
 }
