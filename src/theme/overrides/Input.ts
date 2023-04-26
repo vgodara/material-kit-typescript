@@ -73,6 +73,7 @@ export default function Input(theme: Theme) {
         MuiFormLabel: {
             styleOverrides: {
                 root: {
+                    color:theme.palette.text.disabled,
                     '&.Mui-focused': {
                         color: theme.palette.text.primary,
                     },
