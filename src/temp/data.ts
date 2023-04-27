@@ -15,6 +15,7 @@ export const TABLE_HEAD: HeadCell<User>[] = [
     {id: 'status', label: 'Status', alignRight: false},
     {id: 'avatarUrl'}
 ];
+export const covers=Array(24).fill(0).map((_,index)=> `/assets/images/covers/cover_${index + 1}.jpg`)
 export const users = [...Array(24)].map((_, index) => ({
     id: faker.datatype.uuid(),
     avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
@@ -35,6 +36,15 @@ export const users = [...Array(24)].map((_, index) => ({
         'Full Stack Developer',
     ])!,
 }));
+export const userCards = users.map((user) => ({
+    name: user.name,
+    avatar: user.avatarUrl,
+    cover: sample(covers)!,
+    role: user.role,
+    follower: faker.datatype.number({min: 1000}),
+    following: faker.datatype.number({min: 1000}),
+    totalPost: faker.datatype.number({min: 1000}),
+}))
 const PRODUCT_NAME = [
     'Nike Air Force 1 NDESTRUKT',
     'Nike Space Hippie 04',
@@ -144,7 +154,7 @@ const POST_TITLES = [
 ];
 export const posts = [...Array(23)].map((_, index) => ({
     id: faker.datatype.uuid(),
-    cover: `/assets/images/covers/cover_${index + 1}.jpg`,
+    cover: sample(covers)!,
     title: POST_TITLES[index + 1],
     createdAt: faker.date.past(),
     view: faker.datatype.number(),
