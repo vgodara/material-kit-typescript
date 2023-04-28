@@ -32,6 +32,7 @@ export default function Button(theme:Theme) {
                     border: `1px solid ${alpha(theme.palette.grey[500], 0.32)}`,
                     '&:hover': {
                         backgroundColor: theme.palette.action.hover,
+                        borderColor:theme.palette.grey[800]
                     },
                 },
                 textInherit: {
