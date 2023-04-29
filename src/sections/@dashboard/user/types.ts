@@ -27,6 +27,14 @@ interface UserOverView {
     studyPlace: string
 }
 
+interface SocialMediaLinks {
+    facebook: string,
+    instagram: string,
+    linkedin: string,
+    twitter: string
+}
+
+
 
 export interface UserTableToolbarProps {
     numSelected: number,
@@ -41,4 +49,8 @@ export interface UserCardProps{
 
 export interface UserOverViewProps {
     overView: UserOverView
+}
+
+export interface SocialMediaLinkProps {
+    links: SocialMediaLinks
 }
