@@ -24,9 +24,16 @@ interface UserOverView {
     aboutMe: string
     residence: string,
     email: string,
-    workRole:string,
+    workRole: string,
     workPlace: string,
     studyPlace: string
+}
+
+interface SocialMediaLinks {
+    facebook: string,
+    instagram: string,
+    linkedin: string,
+    twitter: string
 }
 
 interface BaseIconLinkList {
@@ -60,4 +67,8 @@ export interface IconLinkListProps {
 
 export interface UserOverViewProps {
     overView: UserOverView
+}
+
+export interface SocialMediaLinkProps {
+    links: SocialMediaLinks
 }
