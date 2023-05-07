@@ -82,10 +82,8 @@ export interface UserOverViewProps {
     overView: UserOverView
 }
 
-export interface SocialMediaLinkProps {
-    links: SocialMediaLinks
-}
 
 export interface UserPostProps {
     post:Post
 }
+
