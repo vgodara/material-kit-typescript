@@ -7,6 +7,7 @@ export interface User {
     id: string,
     status: string
 }
+
 interface UserCard {
     name: string,
     avatar:string,
@@ -17,6 +18,16 @@ interface UserCard {
     totalPost:number,
 }
 
+interface UserOverView {
+    aboutMe: string
+    residence: string,
+    email: string,
+    workRole: string,
+    workPlace: string,
+    studyPlace: string
+}
+
+
 export interface UserTableToolbarProps {
     numSelected: number,
     filterName: string,
@@ -25,4 +36,9 @@ export interface UserTableToolbarProps {
 
 export interface UserCardProps{
     user:UserCard
+}
+
+
+export interface UserOverViewProps {
+    overView: UserOverView
 }
