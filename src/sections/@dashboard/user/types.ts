@@ -17,6 +17,12 @@ interface UserCard {
     following:number,
     totalPost:number,
 }
+interface SocialMediaLinks {
+    facebook: string,
+    instagram: string,
+    linkedin: string,
+    twitter: string
+}
 
 interface UserOverView {
     aboutMe: string
@@ -36,6 +42,9 @@ export interface UserTableToolbarProps {
 
 export interface UserCardProps{
     user:UserCard
+}
+export interface SocialMediaLinkProps {
+    links: SocialMediaLinks
 }
 
 
