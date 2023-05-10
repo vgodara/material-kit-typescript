@@ -32,6 +32,13 @@ interface UserOverView {
     studyPlace: string
 }
 
+interface PostOverView {
+    id: string,
+    title: string
+    cover: string
+    postedAt: Date
+}
+
 export interface BasicUserInfo {
     id:string,
     name:string,
@@ -81,4 +88,8 @@ export interface UserOverViewProps {
 }
 export interface UserPostProps {
     post:Post
+}
+
+export interface UserPostOverviewProps {
+    post: PostOverView
 }
