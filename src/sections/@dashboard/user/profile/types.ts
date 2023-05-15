@@ -42,6 +42,7 @@ export interface Comment extends Interaction {
     comment:string
 
 }
+
 export const isComment = (interaction: Interaction): interaction is Comment => interaction.type === "comment";
 
 interface Post {
@@ -52,6 +53,14 @@ interface Post {
     createdAt:Date
     interactions:Interaction[]
 }
+
+interface UserInfo {
+    follower:number,
+    following:number,
+    overView:UserOverView
+    socialMedia:SocialMediaLinks
+}
+
 export interface SocialMediaLinkProps {
     links: SocialMediaLinks
 }
@@ -66,4 +75,13 @@ export interface UserPostProps {
 
 export interface UserPostOverviewProps {
     post: PostOverView
+}
+
+export interface UserInfoProps {
+    userInfo:UserInfo
+}
+
+export interface UserProfileProps {
+    userInfo:UserInfo
+    posts:Post[]
 }
