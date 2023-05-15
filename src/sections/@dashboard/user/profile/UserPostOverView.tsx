@@ -1,9 +1,9 @@
 import {Box, Card, CardContent, IconButton, Stack, Typography} from "@mui/material";
 import {Image} from "./styles";
-import {bgBlur} from "../../../utils/cssStyles";
-import {fDate} from "../../../utils/formatTime";
+import {bgBlur} from "../../../../utils/cssStyles";
+import {fDate} from "../../../../utils/formatTime";
 import {Link as RouterLink} from 'react-router-dom'
-import Iconify from "../../../components/iconify";
+import Iconify from "../../../../components/iconify";
 import React from "react";
 import {UserPostOverviewProps} from "./types";
 

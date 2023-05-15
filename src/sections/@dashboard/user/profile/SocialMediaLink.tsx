@@ -1,9 +1,10 @@
 import {Card, CardContent, CardHeader} from "@mui/material";
 import {SocialMediaLinkProps} from "./types";
 import React from "react";
-import Iconify from "../../../components/iconify";
+import Iconify from "../../../../components/iconify";
 import {Variant} from "@mui/material/styles/createTypography";
-import IconLinkList from "../../../components/lists/IconLinkList";
+import IconLinkList from "../../../../components/lists/IconLinkList";
+
 
 export default function SocialMediaLink({links: {facebook, instagram, linkedin, twitter}}: SocialMediaLinkProps) {
     const items = [

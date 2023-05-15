@@ -15,10 +15,10 @@ import {
     Typography
 } from "@mui/material";
 import {faker} from "@faker-js/faker";
-import {fDate} from "../../../utils/formatTime";
+import {fDate} from "../../../../utils/formatTime";
 import Image from "mui-image";
-import Iconify from "../../../components/iconify";
-import {fShortenNumber} from "../../../utils/formatNumber";
+import Iconify from "../../../../components/iconify";
+import {fShortenNumber} from "../../../../utils/formatNumber";
 import {BasicUserInfo, Interaction, isComment, isLike, UserPostProps} from "./types";
 
 export default function UserPost({post: {title, cover, user, createdAt, interactions}}: UserPostProps) {
