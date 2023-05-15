@@ -61,6 +61,10 @@ interface UserInfo {
     socialMedia:SocialMediaLinks
 }
 
+interface UserFollowerCard extends BasicUserInfo{
+    isFollowed:boolean
+}
+
 export interface SocialMediaLinkProps {
     links: SocialMediaLinks
 }
@@ -87,4 +91,12 @@ export interface UserProfileProps {
 }
 export interface UserPostListProps {
     posts:PostOverView[]
+}
+
+export interface UserFollowerCardProps {
+    user:UserFollowerCard
+
+}
+export interface UserFollowerListProps {
+    users:UserFollowerCard[]
 }
