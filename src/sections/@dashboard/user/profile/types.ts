@@ -85,3 +85,6 @@ export interface UserProfileProps {
     userInfo:UserInfo
     posts:Post[]
 }
+export interface UserPostListProps {
+    posts:PostOverView[]
+}
