@@ -1,8 +1,8 @@
 import {Box, Button, Card, CardContent, Fab, FormControl, Stack, TextField} from "@mui/material";
 import React, {useState} from "react";
-import {nonNullOnly} from "../../../utils/helper";
+import {nonNullOnly} from "../../../../utils/helper";
 import {useDropzone} from "react-dropzone";
-import Iconify from "../../../components/iconify";
+import Iconify from "../../../../components/iconify";
 
 export default function UserCreatePost() {
     const [postText, setPostText] = useState<string>('')
