@@ -1,5 +1,5 @@
 import {Box, Card, CardContent, IconButton, Stack, Typography} from "@mui/material";
-import {Image, ImageWrapper} from "./styles";
+import {Image} from "./styles";
 import {bgBlur} from "../../../utils/cssStyles";
 import {fDate} from "../../../utils/formatTime";
 import {Link as RouterLink} from 'react-router-dom'
@@ -7,7 +7,7 @@ import Iconify from "../../../components/iconify";
 import React from "react";
 import {UserPostOverviewProps} from "./types";
 
-export default function UserPostOverView({post: {id, title, cover, postedAt}}: UserPostOverviewProps) {
+export default function UserPostOverView({post: {id, title, cover, createdAt}}: UserPostOverviewProps) {
     return (<RouterLink to={'#'}>
         <Card>
             <Cover cover={cover}/>
@@ -24,7 +24,7 @@ export default function UserPostOverView({post: {id, title, cover, postedAt}}: U
             })}>
                 <Stack spacing={1}>
                     <Typography variant={'subtitle1'}>{title}</Typography>
-                    <Typography sx={{opacity: 0.72}} variant={'body2'}>{fDate(postedAt)}</Typography>
+                    <Typography sx={{opacity: 0.72}} variant={'body2'}>{fDate(createdAt)}</Typography>
                 </Stack>
                 <IconButton size="large" color="inherit">
                     <Iconify icon={'eva:more-vertical-fill'}/>

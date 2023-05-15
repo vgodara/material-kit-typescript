@@ -21,13 +21,13 @@ import Iconify from "../../../components/iconify";
 import {fShortenNumber} from "../../../utils/formatNumber";
 import {BasicUserInfo, Interaction, isComment, isLike, UserPostProps} from "./types";
 
-export default function UserPost({post: {content, media, user, date, interactions}}: UserPostProps) {
+export default function UserPost({post: {title, cover, user, createdAt, interactions}}: UserPostProps) {
 
     return <Card>
-        <Header displayName={user.name} avatar={user.avatar} date={date}/>
+        <Header displayName={user.name} avatar={user.avatar} date={createdAt}/>
         <CardContent>
-            <Typography>{content}</Typography>
-            <Cover image={media}/>
+            <Typography>{title}</Typography>
+            <Cover image={cover}/>
             <Interactions interactions={interactions}/>
 
         </CardContent>
@@ -76,7 +76,7 @@ function Interactions({interactions}: { interactions: Interaction[] }) {
     </>)
 }
 
-function Likes({likes}: { likes: { date: Date, userInfo: BasicUserInfo }[] }) {
+function Likes({likes}: { likes: { createdAt: Date, user: BasicUserInfo }[] }) {
     return (<>
         <Stack direction={'row'} justifyContent={'space-between'} sx={{pt: 2, pb: 3}}>
             <Stack direction={'row'} alignItems={'center'}>
@@ -96,7 +96,7 @@ function Likes({likes}: { likes: { date: Date, userInfo: BasicUserInfo }[] }) {
                     }
                 })} max={3}>
                     {likes.map((like, index) => (
-                        <Avatar sx={{width: 32, height: 32}} key={index} src={like.userInfo.avatar}/>
+                        <Avatar sx={{width: 32, height: 32}} key={index} src={like.user.avatar}/>
                     ))}
                 </AvatarGroup>
             </Stack>
@@ -112,10 +112,10 @@ function Likes({likes}: { likes: { date: Date, userInfo: BasicUserInfo }[] }) {
         </Stack></>)
 }
 
-function Comment({comment}: { comment: { comment: string, userInfo: BasicUserInfo, date: Date } }) {
+function Comment({comment}: { comment: { comment: string, user: BasicUserInfo, createdAt: Date } }) {
     return (<>
         <Stack direction={'row'} spacing={2}>
-            <Avatar sx={{flexShrink: 0}} src={comment.userInfo.avatar}/>
+            <Avatar sx={{flexShrink: 0}} src={comment.user.avatar}/>
             <Paper sx={{
                 flexGrow: 1,
                 backgroundColor: (theme) => theme.palette.background.neutral,
@@ -124,8 +124,8 @@ function Comment({comment}: { comment: { comment: string, userInfo: BasicUserInf
             }}>
                 <Stack mb={0.5} direction={{xs: 'column', sm: 'row'}} alignItems={{sm: 'center'}}
                        justifyContent={'space-between'}>
-                    <Typography variant={'subtitle2'}>{comment.userInfo.name}</Typography>
-                    <Typography color={'text.disabled'} variant={'caption'}>{fDate(comment.date)}</Typography>
+                    <Typography variant={'subtitle2'}>{comment.user.name}</Typography>
+                    <Typography color={'text.disabled'} variant={'caption'}>{fDate(comment.createdAt)}</Typography>
                 </Stack>
                 <Typography color={'text.secondary'} variant={'body2'}>{comment.comment}</Typography>
             </Paper>
