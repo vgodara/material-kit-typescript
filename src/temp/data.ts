@@ -15,28 +15,42 @@ export const TABLE_HEAD: HeadCell<User>[] = [
     {id: 'status', label: 'Status', alignRight: false},
     {id: 'avatarUrl'}
 ];
-export const covers=Array(24).fill(0).map((_,index)=> `/assets/images/covers/cover_${index + 1}.jpg`)
+const cover = (index: number) => (`/assets/images/covers/cover_${index + 1}.jpg`)
+const userRoles = [
+    'Leader',
+    'Hr Manager',
+    'UI Designer',
+    'UX Designer',
+    'UI/UX Designer',
+    'Project Manager',
+    'Backend Developer',
+    'Full Stack Designer',
+    'Front End Developer',
+    'Full Stack Developer',
+]
+const userAvatar = (index: number) => (`/assets/images/avatars/avatar_${index + 1}.jpg`)
+const userStatus = ['active', 'banned']
+const socialMedia = (userName: string) => ({
+    facebook: `https://www.facebook.com/${userName}`,
+    instagram: `https://www.instagram.com/${userName}`,
+    linkedin: `https://www.linkedin.com/in/${userName}`,
+    twitter: `https://www.twitter.com/${userName}`
+
+})
+const covers = Array(24).fill(0).map((_, index) => cover(index))
+const productStatus = ['sale', 'new', '', '']
+const productStock = ['low stock', 'out of stock', 'in stock']
 export const users = [...Array(24)].map((_, index) => ({
     id: faker.datatype.uuid(),
-    avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+    avatarUrl: userAvatar(index),
     name: faker.name.fullName(),
     company: faker.company.name(),
     isVerified: faker.datatype.boolean(),
-    status: sample(['active', 'banned'])!,
-    role: sample([
-        'Leader',
-        'Hr Manager',
-        'UI Designer',
-        'UX Designer',
-        'UI/UX Designer',
-        'Project Manager',
-        'Backend Developer',
-        'Full Stack Designer',
-        'Front End Developer',
-        'Full Stack Developer',
-    ])!,
+    status: sample(userStatus)!,
+    role: sample(userRoles)!,
 }));
 export const userCards = users.map((user) => ({
+    id: user.id,
     name: user.name,
     avatar: user.avatarUrl,
     cover: sample(covers)!,
@@ -45,6 +59,23 @@ export const userCards = users.map((user) => ({
     following: faker.datatype.number({min: 1000}),
     totalPost: faker.datatype.number({min: 1000}),
 }))
+export const userFollowers = userCards.map((user) => ({isFollowed: faker.datatype.boolean(), ...user}))
+export const userFollowings = userCards.map((user) => ({
+    socialMedia:socialMedia(faker.internet.userName()), ...user
+}))
+export const userInfo={
+    follower: faker.datatype.number({min: 1000}),
+    following: faker.datatype.number({min: 1000}),
+    overView: {
+        aboutMe: faker.lorem.lines(1),
+        email: faker.internet.email(),
+        workRole: sample(userRoles)!,
+        workPlace: faker.company.name(),
+        studyPlace: faker.address.city(),
+        residence: faker.address.city(),
+    },
+    socialMedia:socialMedia(faker.internet.userName())
+}
 const PRODUCT_NAME = [
     'Nike Air Force 1 NDESTRUKT',
     'Nike Space Hippie 04',
@@ -91,9 +122,9 @@ export const products = [...Array(24)].map((_, index) => {
             (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
             PRODUCT_COLOR,
         sizes: [...Array(5)].map((_, index) => (`${index + 5}`)),
-        status: sample(['sale', 'new', '', ''])!,
+        status: sample(productStatus)!,
         createdAt: faker.date.past(),
-        stock:sample(['low stock','out of stock','in stock'])!,
+        stock: sample(productStock)!,
     };
 });
 export const productDetails = [...Array(24)].map((_, index) => ({
@@ -163,9 +194,28 @@ export const posts = [...Array(23)].map((_, index) => ({
     favorite: faker.datatype.number(),
     author: {
         name: faker.name.fullName(),
-        avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
+        avatarUrl: userAvatar(index),
     },
 }));
+
+export const postsDetails = posts.map((post, index) => {
+    const basicUsers = users.map((user) => ({id: user.id, name: user.name, avatar: user.avatarUrl}))
+    return {
+        id: post.id,
+        cover: post.cover,
+        title: post.title,
+        createdAt: post.createdAt,
+        user: sample(basicUsers)!,
+        interactions: Array(48).fill(0).map((_, index) => ({
+            createdAt: faker.date.recent(),
+            user: sample(basicUsers)!,
+            ...(index % 2 === 0 ? {
+                type: 'comment' as 'comment',
+                comment: faker.lorem.lines(2)
+            } : {type: 'like' as 'like'})
+        }))
+    }
+})
 
 export const SORT_OPTIONS: BlogPostSortOption[] = [
     {value: 'latest', label: 'Latest'},
