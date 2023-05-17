@@ -22,47 +22,54 @@ interface PostOverView {
 }
 
 export interface BasicUserInfo {
-    id:string,
-    name:string,
-    avatar:string
+    id: string,
+    name: string,
+    avatar: string,
 }
 
-export interface Interaction  {
-    type:'like'|'comment'
-    createdAt:Date,
-    user:BasicUserInfo
+export interface Interaction {
+    type: 'like' | 'comment'
+    createdAt: Date,
+    user: BasicUserInfo
 }
-interface Like extends Interaction{
-    type:'like'
+
+interface Like extends Interaction {
+    type: 'like'
 }
+
 export const isLike = (interaction: Interaction): interaction is Like => interaction.type === "like";
 
 export interface Comment extends Interaction {
-    type:'comment'
-    comment:string
+    type: 'comment'
+    comment: string
 
 }
 
 export const isComment = (interaction: Interaction): interaction is Comment => interaction.type === "comment";
 
 interface Post {
-    id:string
-    cover:string
-    title:string,
-    user:BasicUserInfo,
-    createdAt:Date
-    interactions:Interaction[]
+    id: string
+    cover: string
+    title: string,
+    user: BasicUserInfo,
+    createdAt: Date
+    interactions: Interaction[]
 }
 
 interface UserInfo {
-    follower:number,
-    following:number,
-    overView:UserOverView
-    socialMedia:SocialMediaLinks
+    follower: number,
+    following: number,
+    overView: UserOverView
+    socialMedia: SocialMediaLinks
 }
 
-interface UserFollowerCard extends BasicUserInfo{
-    isFollowed:boolean
+interface UserFollowerCard extends BasicUserInfo {
+    isFollowed: boolean
+}
+
+interface UserFollowingCard extends BasicUserInfo {
+    role: string
+    socialMedia: SocialMediaLinks
 }
 
 export interface SocialMediaLinkProps {
@@ -73,8 +80,9 @@ export interface SocialMediaLinkProps {
 export interface UserOverViewProps {
     overView: UserOverView
 }
+
 export interface UserPostProps {
-    post:Post
+    post: Post
 }
 
 export interface UserPostOverviewProps {
@@ -82,21 +90,31 @@ export interface UserPostOverviewProps {
 }
 
 export interface UserInfoProps {
-    userInfo:UserInfo
+    userInfo: UserInfo
 }
 
 export interface UserProfileProps {
-    userInfo:UserInfo
-    posts:Post[]
+    userInfo: UserInfo
+    posts: Post[]
 }
+
 export interface UserPostListProps {
-    posts:PostOverView[]
+    posts: PostOverView[]
 }
 
 export interface UserFollowerCardProps {
-    user:UserFollowerCard
+    user: UserFollowerCard
 
 }
+
 export interface UserFollowerListProps {
-    users:UserFollowerCard[]
+    users: UserFollowerCard[]
+}
+
+export interface UserFollowingCardProps {
+    user:UserFollowingCard
+}
+
+export interface UserFollowingListProps{
+    users:UserFollowingCard[]
 }
