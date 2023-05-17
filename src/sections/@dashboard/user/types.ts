@@ -36,7 +36,7 @@ interface PostOverView {
     id: string,
     title: string
     cover: string
-    postedAt: Date
+    createdAt: Date
 }
 
 export interface BasicUserInfo {
@@ -47,8 +47,8 @@ export interface BasicUserInfo {
 
 export interface Interaction  {
     type:'like'|'comment'
-    date:Date,
-    userInfo:BasicUserInfo
+    createdAt:Date,
+    user:BasicUserInfo
 }
 interface Like extends Interaction{
     type:'like'
@@ -63,10 +63,11 @@ export interface Comment extends Interaction {
 export const isComment = (interaction: Interaction): interaction is Comment => interaction.type === "comment";
 
 interface Post {
-    media:string
-    content:string,
+    id:string
+    cover:string
+    title:string,
     user:BasicUserInfo,
-    date:Date
+    createdAt:Date
     interactions:Interaction[]
 }
 export interface UserTableToolbarProps {
