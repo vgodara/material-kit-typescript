@@ -1,9 +1,9 @@
 import {Card, CardContent, CardHeader, Typography} from "@mui/material";
 import {UserOverViewProps} from "./types";
-import Iconify from "../../../components/iconify";
+import Iconify from "../../../../components/iconify";
 import React from "react";
 import {Variant} from "@mui/material/styles/createTypography";
-import IconLinkList from "../../../components/lists/IconLinkList";
+import IconLinkList from "../../../../components/lists/IconLinkList";
 
 export default function UserOverView({
                                          overView: {
