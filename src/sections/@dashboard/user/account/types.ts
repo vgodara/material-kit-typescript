@@ -25,3 +25,10 @@ export interface UpdateInfoProps {
     info: UserInfo
     onUpdate: (newInfo: UpdateUserInfo) => void
 }
+
+export interface UpdateProfilePicProps{
+    image:string
+    isProfilePublic:boolean
+    onImageUpdate:(value:string)=>void
+    onProfileVisibilityUpdate:(value:boolean)=>void
+}
