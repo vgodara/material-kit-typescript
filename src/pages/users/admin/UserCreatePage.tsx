@@ -33,7 +33,7 @@ export default function UserCreatePage() {
                 <Grid2 xs={12} md={4}>
                     <Card sx={{padding: (theme) => theme.spacing(10, 3, 3, 3)}}>
                         <Stack spacing={5}>
-                            <UploadAvatar/>
+                            <UploadAvatar onImageSelection={()=>{}}/>
                             <FormControlLabel sx={{flexDirection: 'row-reverse'}} control={<Switch/>}
                                               label={<>
                                                   <Typography marginBottom={0.5} variant={'subtitle2'}>

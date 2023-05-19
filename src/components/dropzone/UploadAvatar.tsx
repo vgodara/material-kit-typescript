@@ -4,12 +4,15 @@ import React, {useState} from "react";
 import {alpha} from "@mui/material/styles";
 import Iconify from "../iconify";
 import Image from "mui-image";
+import {UploadAvatarProps} from "./types";
+import {nonNullOnly} from "../../utils/helper";
 
-export default function UploadAvatar() {
-    const [image,setImage]=useState<string|undefined>()
+export default function UploadAvatar({image:propImage,onImageSelection}:UploadAvatarProps) {
+    const [image,setImage]=useState<string|undefined>(propImage)
     const onDrop = (acceptedFiles: File[]) => {
         const fileAsUrl = acceptedFiles.filter((_,index)=>index===0).map((file) => URL.createObjectURL(file)).find(()=>true)
         setImage(fileAsUrl)
+        nonNullOnly(fileAsUrl,onImageSelection)
     }
 
     const {
