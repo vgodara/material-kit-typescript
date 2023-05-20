@@ -1,11 +1,11 @@
-import {ActivityNotificationProps} from "./types";
+import {NotificationSettingProps} from "./types";
 import {useState} from "react";
-import {FormControlLabel, Switch, Typography} from "@mui/material";
+import {FormControlLabel, FormGroup, Switch, Typography} from "@mui/material";
 
-export default function ActivityNotification({activities,onStatusChange}:ActivityNotificationProps){
-    const statusMap=() => {
+export default function NotificationSetting({heading, notifications, onStatusChange}: NotificationSettingProps) {
+    const statusMap = () => {
         const initialSwitchStates = new Map<string, boolean>();
-        activities.forEach((activity) => {
+        notifications.forEach((activity) => {
             initialSwitchStates.set(activity.type, activity.status);
         });
         return initialSwitchStates;
@@ -21,11 +21,12 @@ export default function ActivityNotification({activities,onStatusChange}:Activit
         onStatusChange(type, status);
     };
 
-    return <>
-        <Typography color={'text.secondary'} variant={'overline'}>Activities</Typography>
+    return <FormGroup>
+        <Typography mb={2} color={'text.secondary'} variant={'overline'}>{heading}</Typography>
         {
-            activities.map(({type, status, label},index)=>(<>
+            notifications.map(({type, status, label},index)=>(
             <FormControlLabel
+                slotProps={{typography:{variant:'body2'}}}
                 key={index}
                 control={
                 <Switch
@@ -34,7 +35,7 @@ export default function ActivityNotification({activities,onStatusChange}:Activit
                     onChange={(_,checked)=>handleSwitchClick(type,checked)}
                 />}
                 label={label}/>
-            </>))
+            ))
         }
-    </>
+    </FormGroup>
 }
