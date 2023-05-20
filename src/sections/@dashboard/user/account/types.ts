@@ -32,3 +32,12 @@ export interface UpdateProfilePicProps{
     onImageUpdate:(value:string)=>void
     onProfileVisibilityUpdate:(value:boolean)=>void
 }
+interface Activity{
+    label:string
+    status:boolean
+    type:string
+}
+export interface ActivityNotificationProps {
+    activities:Activity[]
+    onStatusChange:(type:string,status:boolean)=>void
+}
