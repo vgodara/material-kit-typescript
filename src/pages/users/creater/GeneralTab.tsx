@@ -7,8 +7,8 @@ import {faker} from "@faker-js/faker";
 export default function GeneralTab() {
     const previousImage = faker.image.avatar()
     const wasProfilePublic = faker.datatype.boolean()
-    const [newImage, setNewImage] = useState<string | undefined>()
-    const [isProfilePublic, setIsProfilePublic] = useState<boolean | undefined>()
+    const [, setNewImage] = useState<string | undefined>()
+    const [, setIsProfilePublic] = useState<boolean | undefined>()
     const previousInfo = {
         name: faker.name.fullName(),
         emailAddress: faker.internet.email(),
@@ -33,9 +33,7 @@ export default function GeneralTab() {
                 </Grid2>
                 <Grid2 xs={12} md={8}>
                     <UserUpdateInfoSection info={previousInfo} onUpdate={(newInfo) => {
-                        console.log(newInfo)
-                        newImage && console.log(newImage)
-                        isProfilePublic && console.log(isProfilePublic)
+                       /*TODO  Make an API call to update the information */
                     }}/>
                 </Grid2>
             </Grid2>
