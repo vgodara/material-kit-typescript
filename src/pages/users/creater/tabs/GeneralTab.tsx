@@ -1,6 +1,6 @@
 import {Box} from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import {UserUpdateInfoSection, UserUpdateProfilePicSection} from "../../../sections/@dashboard/user";
+import {UserUpdateInfoSection, UserUpdateProfilePicSection} from "../../../../sections/@dashboard/user";
 import {useState} from "react";
 import {faker} from "@faker-js/faker";
 
