@@ -1,5 +1,5 @@
 import {Button, Card, CardActions, CardContent, Stack} from "@mui/material";
-import {UserActivityNotificationSection} from "../../../sections/@dashboard/user";
+import {UserActivityNotificationSection} from "../../../../sections/@dashboard/user";
 import {faker} from "@faker-js/faker";
 import {useRef} from "react";
 

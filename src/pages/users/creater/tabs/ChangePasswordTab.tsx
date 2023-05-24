@@ -1,7 +1,7 @@
 import {Button, Card, Stack, TextField} from "@mui/material";
 import {ChangeEvent, useRef, useState} from "react";
 import {faker} from "@faker-js/faker";
-import {nonNullOnly} from "../../../utils/helper";
+import {nonNullOnly} from "../../../../utils/helper";
 
 export default function ChangePasswordTab() {
     const typingDelay=500

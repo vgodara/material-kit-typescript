@@ -1,7 +1,7 @@
 import {Button, Card, InputAdornment, Stack, TextField} from "@mui/material";
-import {userInfo} from "../../../temp/data";
+import {userInfo} from "../../../../temp/data";
 import {ChangeEvent, useRef} from "react";
-import Iconify from "../../../components/iconify";
+import Iconify from "../../../../components/iconify";
 
 type SocialMediaKey=(keyof (typeof userInfo.socialMedia))
 export default function SocialMediaLinkTab(){
